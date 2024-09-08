@@ -35,5 +35,5 @@ if (web.status_code == 200):
 else:
     print('ERRO AO ACESSAR A API: ', web.status_code)
 
-for o in Lista_Dados:
-    print('data: ', o.data, 'open: ', o.open, 'low: ', o.low, 'high: ', o.high , 'close: ', o.close)
+#for o in Lista_Dados:
+    #print('data: ', o.data, 'open: ', o.open, 'low: ', o.low, 'high: ', o.high , 'close: ', o.close)
