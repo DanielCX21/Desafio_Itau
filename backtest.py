@@ -22,6 +22,7 @@ for candle in lista_dados:
 for data, candle in dicionario_dados.items():
     if candle['close'] > candle['open'] * 1.1:
         print(f"Data: {data}, o preço aumentou mais de 10%")
+        print("fodase")
 
     if candle['close'] < candle['open'] * 0.9:
         print(f"Data: {data}, o preço caiu mais de 10%")
