@@ -61,5 +61,5 @@ with open('dados_candles.json', 'w') as json_file:
 
 print("Dados salvos em 'dados_candles.json'.")
 
-for o in Lista_Dados:
-    print('data: ', o.data, 'open: ', o.open, 'low: ', o.low, 'high: ', o.high , 'close: ', o.close)
+#for o in Lista_Dados:
+#    print('data: ', o.data, 'open: ', o.open, 'low: ', o.low, 'high: ', o.high , 'close: ', o.close)
