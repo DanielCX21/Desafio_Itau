@@ -32,8 +32,6 @@ link = urlMatriz + 'function=' + function + "&symbol=" + symbol + '&outputsize='
 
 web = requests.get(link)
 
-#print(link,"\n")
-
 if (web.status_code == 200):
     dados = web.json()
 
@@ -53,13 +51,9 @@ if (web.status_code == 200):
 else:
     print('ERRO AO ACESSAR A API: ', web.status_code)
 
-# Convertendo a lista de objetos para uma lista de dicionários
 lista_dados_dict = [candle.trans_json() for candle in Lista_Dados]
 
 with open('dados_candles.json', 'w') as json_file:
     json.dump(lista_dados_dict, json_file, indent=4)
 
 print("Dados salvos em 'dados_candles.json'.")
-
-#for o in Lista_Dados:
-#    print('data: ', o.data, 'open: ', o.open, 'low: ', o.low, 'high: ', o.high , 'close: ', o.close)

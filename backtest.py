@@ -1,4 +1,3 @@
-#pega uma base de dados e testa algo
 import json
 import funcoes
 
@@ -15,7 +14,6 @@ for candle in lista_dados:
         'close': candle['close'],
         'volume': candle['volume']
     }
-#esta armazenado em dicionario_dados
 
 patrimonio = float(1000)
 
