@@ -18,11 +18,16 @@ for i in juros_stake:
     patrimonio_stake.append(patrimonio_stake[pos] * mult)
     pos += 1
 
+if backtest.patrimonio > patrimonio_stake[-1]:
+    print("A estratégia ganhou da pull de USDT")
+else:
+    print("A estratégia perdeu da pull de USDT")
+
 plt.figure(figsize=(10, 5))
 plt.plot(patrimonio_stake, label="StakeUSDT", color="blue")
 plt.plot(backtest.patrimonio_contabilizado, label="Estratégia", color="red")
 plt.title("Gráfico de comparação")
-plt.xlabel("Índice")
-plt.ylabel("Valor")
+plt.xlabel("Valor")
+plt.ylabel("Tempo")
 plt.grid(True)
 plt.show()

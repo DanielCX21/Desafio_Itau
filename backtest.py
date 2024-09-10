@@ -44,14 +44,12 @@ for data, candle in reversed(list(dicionario_dados.items())):
     if sinal_compra == 1 and not comprado:
         comprado = True
         compras += 1
-        print(f"{data}: compra")
         quantidade = patrimonio / candle['close']
 
     if sinal_venda == -1 and comprado:
         comprado = False
         vendas += 1
         patrimonio = quantidade * candle['close']
-        print(f"{data}: Vende: {patrimonio}") 
 
     if comprado:
         contador += 1
@@ -60,14 +58,8 @@ for data, candle in reversed(list(dicionario_dados.items())):
         comprado = False
         vendas += 1
         patrimonio = quantidade * candle['close']
-        print(f"{data}: Vende: {patrimonio} no lucro após 15 dias") 
 
     if contador % 30 == 0 and contador > 29 and comprado:
         comprado = False
         vendas += 1
         patrimonio = quantidade * candle['close']
-        print(f"{data}: Vende: {patrimonio} no prejuizo após 30 dias") 
-
-print(f"o patrimonio é {patrimonio}")
-
-print(f"Foram feitas {compras + vendas} operações")
