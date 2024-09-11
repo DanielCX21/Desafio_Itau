@@ -1,3 +1,5 @@
+#estratégia bunda
+
 def gerar_sinal_compra(candle):
     if candle['close'] < candle['open'] * 0.95:
         return 1
