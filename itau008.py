@@ -24,12 +24,12 @@ print(link)
 web = requests.get(link)
 
 # Solicitação de dados Fear and Greed
-feraAndgreed = requests.get('https://api.coin-stats.com/v2/fear-greed?type=all')
+fearAndgreed = requests.get('https://api.coin-stats.com/v2/fear-greed?type=all')
 
-# Tratamento de erros para feraAndgreed
-if feraAndgreed.status_code == 200:
+# Tratamento de erros para fearAndgreed
+if fearAndgreed.status_code == 200:
     print('Fear and Greed data aberta com sucesso!')
-    feraGreed = feraAndgreed.json()
+    fearGreed = fearAndgreed.json()
 else:
     print('Erro ao abrir Fear and Greed')
 
@@ -55,8 +55,8 @@ if web.status_code == 200:
         # Verificar se o timestamp é maior ou igual ao timestamp de início
         if unix_time >= timestamp_inicio:
             
-            # Verificar se a data em unix bate com as chaves de feraGreed
-            for fg in feraGreed['data']:
+            # Verificar se a data em unix bate com as chaves de fearGreed
+            for fg in fearGreed['data']:
                 if int(fg['timestamp']) == unix_time:
                     index['fear_greed_value'] = int(fg['value'])  # Transformar o valor do índice de Fear and Greed em inteiro
                     index['fear_greed_classification'] = fg['value_classification']  # Adiciona a classificação (Fear, Extreme Fear, etc.)
