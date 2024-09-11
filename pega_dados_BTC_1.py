@@ -40,7 +40,6 @@ linkMatriz = "https://min-api.cryptocompare.com/data/v2/histoday?"
 
 #parametros
 
-
 fsym = input('Simbolo da criptomoeda. Exemplo: BTC: ') 
 tsym = input('Moeda de conversão. Exemplo: USD: ') 
 limit = input('Número de dias/candles que você deseja. Exemplo: 2000: ')
@@ -53,8 +52,6 @@ link = linkMatriz + "fsym=" + fsym + "&" + "tsym=" + tsym + "&" + "limit=" + lim
 print(link)
 
 web = requests.get(link)
-
-
 
 #tratamento de erros
 
@@ -69,5 +66,3 @@ if (web.status_code == 200):
         lista.append(index)
 else:
     print('erro ao abrir ')
-
-
