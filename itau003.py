@@ -50,6 +50,7 @@ if (web.status_code == 200):
         print('ERRO AO ACESSAR TIME SERIES')
 else:
     print('ERRO AO ACESSAR A API: ', web.status_code)
+    print("viado")
 
 lista_dados_dict = [candle.trans_json() for candle in Lista_Dados]
 
