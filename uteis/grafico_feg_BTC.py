@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import datetime
-from modulacao import lista_dados
+from analise_BTC import lista_dados
 import transform_data
 
 def plotar_grafico(datas, preco):

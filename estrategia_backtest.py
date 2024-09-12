@@ -1,9 +1,9 @@
-import modulacao
+import analise_BTC
 import matplotlib.pyplot as plt
 
 valores_feg = list()
 
-for medo in modulacao.lista_dados:
+for medo in analise_BTC.lista_dados:
     valores_feg.append(medo['fear_greed_value'])
 
 '''

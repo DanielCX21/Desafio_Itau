@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import datetime
-from modulacao import lista_dados
+from analise_BTC import lista_dados
 import transform_data
 
 def plotar_grafico(datas, valores, preco):
@@ -12,7 +12,7 @@ def plotar_grafico(datas, valores, preco):
     # Criar o gráfico
     plt.figure(figsize=(12, 6))
     plt.plot(datas, valores, marker='', linestyle='-', color='red')
-    plt.plot(datas, preco, marker='', linestyle='-', color='green')
+    #plt.plot(datas, preco, marker='', linestyle='-', color='green')
 
 
     # Adicionar título e rótulos

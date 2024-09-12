@@ -2,7 +2,6 @@
 
 Desenvolver uma estratégia de investimentos quantitativa.
 
-
 11/09/2024
 A estratégia será baseada no índice de medo e ganância e 
 utilizará de uma abordagem psicológica do mercado.
@@ -41,6 +40,7 @@ compra ou venda vai permanecer enquanto houver espaço para FOMO ou FUD.
 Ao encerrar esse movimento, geralmente o mercado criptográfico "corrige" 
 brutalmente essas anomalias.
 
+12/09/2024
 Falando sobre a aplicação em si, vamos interpolar os pontos do gráfico de medo e
 ganância, porém para evitar instabilidades com muitos pontos não usaremos a 
 interpolação de Lagrange e sim a interpolação de slipnes cubicas, dessa forma 
