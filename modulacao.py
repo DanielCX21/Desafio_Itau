@@ -11,3 +11,8 @@ lista_dados = dados['Data']['Data']
 #vamos criar um vetor com as datas
 #preciso somente desse arquivo para 
 #me dar as informações nescessarias
+
+#para criar algo sobre o momento da curva, vamos interpolar
+#com os pontos pontos (x,y) conforme a curva for "se revelando"
+#na troca de concavidade possivelmente será um ponto a ser 
+#estudado
