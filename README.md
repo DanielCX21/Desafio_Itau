@@ -40,3 +40,10 @@ um dos lados geralmente as sardinhas estão muito emotivas e o movimento de
 compra ou venda vai permanecer enquanto houver espaço para FOMO ou FUD.
 Ao encerrar esse movimento, geralmente o mercado criptográfico "corrige" 
 brutalmente essas anomalias.
+
+Falando sobre a aplicação em si, vamos interpolar os pontos do gráfico de medo e
+ganância, porém para evitar instabilidades com muitos pontos não usaremos a 
+interpolação de Lagrange e sim a interpolação de slipnes cubicas, dessa forma 
+evitaremos instabilidade na extremidade que será o alvo da análise preservando 
+a suavidade da curva. Com o polinomio criado podemos derivar sem problemas duas 
+vezes e medir a acelaração com que a derivada começa a perder seu caráter.
