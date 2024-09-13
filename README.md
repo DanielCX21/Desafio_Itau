@@ -47,3 +47,10 @@ interpolação de Lagrange e sim a interpolação de slipnes cubicas, dessa form
 evitaremos instabilidade na extremidade que será o alvo da análise preservando 
 a suavidade da curva. Com o polinomio criado podemos derivar sem problemas duas 
 vezes e medir a acelaração com que a derivada começa a perder seu caráter.
+
+13/09/2024
+Ainda sobre a aplicação vamos fazer alguma analogia com algum fenômeno físico
+provavelmente utilizando resistência do ar ou potencial elétrico. Ainda assim,
+vamos utilizar a mesma estratégia citada em (12/09/2024). Porém o fenômeno físico
+será uma forma de vizualização e analogia com o fenômeno psicológico utilizado
+para fazer as compras e vendas.
