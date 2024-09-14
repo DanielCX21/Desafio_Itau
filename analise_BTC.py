@@ -1,5 +1,8 @@
 import json
 import transform_data
+import numpy as np
+from scipy.interpolate import CubicSpline
+import matplotlib.pyplot as plt
 
 with open('dados-BTC.json', 'r') as arquivo:
     dados = json.load(arquivo)
@@ -17,8 +20,9 @@ lista_dados = dados['Data']['Data']
 #na troca de concavidade possivelmente será um ponto a ser 
 #estudado
 
-medo_BTC_norm = list()
-volume_BTC = list()
+medo_BTC = list()
+volume_to_BTC= list()
+volume_from_BTC = list()
 preco_open_BTC = list()
 preco_close_BTC = list()
 data_BTC = list()
@@ -31,53 +35,51 @@ media = media
 media = media / len(lista_dados)
 media = int(media)
 
-for valor in lista_dados:
-    medo_BTC_norm.append(valor['fear_greed_value'] - media)
+#for valor in lista_dados:
+#    medo_BTC.append(valor['fear_greed_value'] - media)
 
 #ou...
-"""
-for valor in lista_dados:
-    medo_BTC_norm.append(valor['fear_greed_value'])
-"""
 
 for valor in lista_dados:
-    volume_BTC.append(valor['volumeto'] - media)
+    medo_BTC.append(int(valor['fear_greed_value'] - 50))
 
 for valor in lista_dados:
-    preco_open_BTC.append(valor['fear_greed_value'])
+    volume_to_BTC.append(valor['volumeto'])
 
 for valor in lista_dados:
-    preco_close_BTC.append(valor['fear_greed_value'])
+    volume_from_BTC.append(valor['volumefrom'])
 
 for valor in lista_dados:
-    data_BTC.append(transform_data.unix_dh(valor['fear_greed_value']))
+    preco_open_BTC.append(valor['open'])
 
-def der(medo):
-    der_medos = list()
-    for i in range(len(medo) - 1):
-        der_medos.append(medo[i + 1] - medo[i])
-    return der_medos
+for valor in lista_dados:
+    preco_close_BTC.append(valor['close'])
 
-def seg_der(der_medo):
-    seg_der_medos = list()
-    for i in range(len(der_medo) - 1):
-        seg_der_medos.append(der_medo[i + 1] - der_medo[i])
-    return seg_der_medos
+for valor in lista_dados:
+    data = transform_data.unix_dh(valor['time'])
+    data = data[:-9] 
+    data_BTC.append(data)
 
-print(media)
-print(medo_BTC_norm)
+der_seg_preco = list()
 
-def sinal_compra(mas1, mas2, vel1, vel2):
-    if vel1 > 0 and vel2 > 0:
-        if (mas1 * vel1 - mas2 * vel2) == 0:
-            return 1
-    else:
-        return 0
+for i in range(1, len(medo_BTC) - 1):
+    x = np.array([1,2,3])
+    y = np.array([preco_close_BTC[i - 1],
+                  preco_close_BTC[i],
+                  preco_close_BTC[i + 1]])
+    cs = CubicSpline(x, y)
+    cs_deriv = cs.derivative()
+    cs_deriv = cs_deriv.derivative()
+    der_seg_preco.append(int(cs_deriv(2)))
+#tenho uma lista com todas as segundas derivadas do preco
 
-def sinal_venda(mas1, mas2, vel1, vel2):
-    if vel1 < 0 and vel2 < 0:
-        if (mas1 * vel1 - mas2 * vel2) == 0:
-            return -1
-    else:
-        return 0
+x = list()
 
+for i in range(len(medo_BTC) - 2):
+    x.append(i)
+
+plt.plot(x,der_seg_preco,color='blue')
+plt.show() 
+
+print(min(der_seg_preco))
+print(max(der_seg_preco))
