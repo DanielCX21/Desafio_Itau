@@ -1,7 +1,7 @@
 import json
 import transform_data
 import numpy as np
-from scipy.interpolate import CubicSpline
+from scipy.interpolate import lagrange
 import matplotlib.pyplot as plt
 
 with open('dados-BTC.json', 'r') as arquivo:
@@ -41,7 +41,7 @@ media = int(media)
 #ou...
 
 for valor in lista_dados:
-    medo_BTC.append(int(valor['fear_greed_value'] - 50))
+    medo_BTC.append(valor['fear_greed_value'] - 50)
 
 for valor in lista_dados:
     volume_to_BTC.append(valor['volumeto'])
@@ -63,23 +63,26 @@ for valor in lista_dados:
 der_seg_preco = list()
 
 for i in range(1, len(medo_BTC) - 1):
-    x = np.array([1,2,3])
+    x = np.array([i - 1,i,i + 1])
     y = np.array([preco_close_BTC[i - 1],
                   preco_close_BTC[i],
                   preco_close_BTC[i + 1]])
-    cs = CubicSpline(x, y)
-    cs_deriv = cs.derivative()
-    cs_deriv = cs_deriv.derivative()
-    der_seg_preco.append(int(cs_deriv(2)))
+    interpol = lagrange(x, y)
+    interpol = interpol.deriv()
+    #interpol = interpol.deriv()
+    der_seg_preco.append(int(interpol(i)))
 #tenho uma lista com todas as segundas derivadas do preco
 
-x = list()
+eixo_x = list()
 
 for i in range(len(medo_BTC) - 2):
-    x.append(i)
+    eixo_x.append(i)
 
-plt.plot(x,der_seg_preco,color='blue')
+'''
+plt.plot(eixo_x,der_seg_preco,color='blue')
+plt.plot(data_BTC,medo_BTC,color='red')
+primeira_data = data_BTC[0]
+ultima_data = data_BTC[-1]
+plt.gca().set_xticks([primeira_data, ultima_data])
 plt.show() 
-
-print(min(der_seg_preco))
-print(max(der_seg_preco))
+'''
