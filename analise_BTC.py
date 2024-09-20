@@ -2,7 +2,7 @@ import json
 import transform_data
 import numpy as np
 from scipy.interpolate import lagrange
-import matplotlib.pyplot as plt
+import matplotlib.pyplot
 
 with open('dados-BTC.json', 'r') as arquivo:
     dados = json.load(arquivo)
@@ -28,12 +28,12 @@ preco_close_BTC = list()
 data_BTC = list()
 media = 0
 
-for valor in lista_dados:
-    media += valor['fear_greed_value']
+#for valor in lista_dados:
+#    media += valor['fear_greed_value']
 
-media = media
-media = media / len(lista_dados)
-media = int(media)
+#media = media
+#media = media / len(lista_dados)
+#media = int(media)
 
 #for valor in lista_dados:
 #    medo_BTC.append(valor['fear_greed_value'] - media)
