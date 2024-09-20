@@ -1,7 +1,7 @@
 import requests
 import json
 from datetime import datetime, timezone
-import transform_data
+from dados import transform_data
 
 lista = []
 linkMatriz = "https://min-api.cryptocompare.com/data/v2/histoday?"

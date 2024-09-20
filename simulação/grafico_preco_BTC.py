@@ -2,21 +2,19 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import datetime
 from analise_BTC import lista_dados
-import transform_data
+from dados import transform_data
 
-def plotar_grafico(datas, valores, preco):
+def plotar_grafico(datas, preco):
     # Converter datas para objetos datetime se necessário
     if isinstance(datas[0], str):
         datas = [datetime.datetime.strptime(data, '%d/%m/%Y %H:%M:%S') for data in datas]
 
     # Criar o gráfico
     plt.figure(figsize=(12, 6))
-    plt.plot(datas, valores, marker='', linestyle='-', color='red')
-    #plt.plot(datas, preco, marker='', linestyle='-', color='green')
-
+    plt.plot(datas, preco, marker='', linestyle='-', color='green')
 
     # Adicionar título e rótulos
-    plt.title('Gráfico de medo e ganância')
+    plt.title('Gráfico de preco')
     plt.xlabel('Data')
     plt.ylabel('Valor')
 
@@ -44,5 +42,6 @@ for BTC in lista_dados:
     datas_graf.append(transform_data.unix_dh(BTC['time']))
     medo_graf.append(BTC['fear_greed_value'])
     preco_fec.append(BTC['close'])
+    vol.append(BTC['volumeto'])
 
-plotar_grafico(datas_graf, medo_graf, preco_fec)
+plotar_grafico(datas_graf, preco_fec)

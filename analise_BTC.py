@@ -1,10 +1,10 @@
 import json
-import transform_data
+from dados import transform_data
 import numpy as np
 from scipy.interpolate import lagrange
-import matplotlib.pyplot
+import matplotlib.pyplot as plt
 
-with open('dados-BTC.json', 'r') as arquivo:
+with open('dados/dados-BTC.json', 'r') as arquivo:
     dados = json.load(arquivo)
 
 #Acessar a lista de dados no campo 'Data' do JSON
