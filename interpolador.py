@@ -76,3 +76,6 @@ def pol(sol,x):
     b = sol[1]
     c = sol[2]
     return (a * (x ** 3) + b * (x ** 2) + c *x)
+
+def reta(ang,lin,x):
+    return ((ang*x) + lin)
