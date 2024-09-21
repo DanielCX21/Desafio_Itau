@@ -54,3 +54,16 @@ provavelmente utilizando resistência do ar ou potencial elétrico. Ainda assim,
 vamos utilizar a mesma estratégia citada em (12/09/2024). Porém o fenômeno físico
 será uma forma de vizualização e analogia com o fenômeno psicológico utilizado
 para fazer as compras e vendas.
+
+21/09/2024
+Após alguns dias apenas olhando e pensando sem sair do lugar, voltamos a realizar
+progresso. Traçamos o gráfico do medo interpolando os pontos 3 a 3 em polinomios
+cúbicos para que seja feita a segunda derivada e por consequência os pontos de 
+inflexão. Além disso vamos deixar disponíveis alguns dados para que possam ser
+levados em conta:
+Por Agora:
+1) Mudança na concavidade (*)
+2) Período sem variação brusca no índice (Regressão linear do índice)
+3) Verificar quantos dias passamos longe do neutro (*)
+4) Juntar os dois primeiros
+5) Média móvel de 50 dias no volume

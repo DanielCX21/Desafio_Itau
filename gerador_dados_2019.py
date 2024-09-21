@@ -5,7 +5,7 @@ from dados import transform_data
 
 lista = []
 linkMatriz = "https://min-api.cryptocompare.com/data/v2/histoday?"
-fsym = "ADA"
+fsym = "BTC"
 tsym = "USD"
 limit = 2000
 toTs_unix = transform_data.dh_unix("11/09/2024")

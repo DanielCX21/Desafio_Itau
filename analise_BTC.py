@@ -1,8 +1,5 @@
 import json
 from dados import transform_data
-import numpy as np
-from scipy.interpolate import lagrange
-import matplotlib.pyplot as plt
 
 with open('dados/dados-BTC.json', 'r') as arquivo:
     dados = json.load(arquivo)
@@ -38,3 +35,6 @@ for valor in lista_dados:
     data = transform_data.unix_dh(valor['time'])
     data = data[:-9] 
     data_BTC.append(data)
+
+#Quantos dias passamos longe do neutro?
+#Todas as listas tem 2001 elementos
