@@ -63,7 +63,7 @@ inflexão. Além disso vamos deixar disponíveis alguns dados para que possam se
 levados em conta:
 Por Agora:
 1) Mudança na concavidade (*)
-2) Período sem variação brusca no índice (Regressão linear do índice)
+2) Período sem variação brusca no índice (Regressão linear do índice) (Reg Lin *)
 3) Verificar quantos dias passamos longe do neutro (*)
 4) Juntar os dois primeiros
-5) Média móvel de 50 dias no volume
+5) Média móvel de 50 dias no volume (*)
