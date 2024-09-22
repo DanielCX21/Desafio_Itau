@@ -29,6 +29,11 @@ for i in range(2,len(medo_BTC) - 1):
         ponto_inflexao_x.append(ponto_inflexao_candidato + translacao)
         y_inflexao.append(interpolador.pol(sol,ponto_inflexao_candidato))
 
+'''
+Para o curto prazo, arrumar os gráficos e deixar os pontos de inflexão 
+na curva principal sempre
+'''
+
 plt.plot(x_suave,y_suave,color='blue')
 plt.scatter(ponto_inflexao_x,y_inflexao,color='red')
 plt.grid(True)
