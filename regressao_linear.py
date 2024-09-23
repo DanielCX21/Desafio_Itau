@@ -10,7 +10,6 @@ coefs_angular = list()
 coefs_linear = list()
 contador = 0
 
-
 for i in range(1998):
     for j in range(4):
         y_interpolar.append(medo_BTC[i+j])
@@ -20,14 +19,6 @@ for i in range(1998):
     coefs_linear.append(linear)
     y_interpolar.clear()
 
-'''
-for i,coef in enumerate(coefs_angular):
-    if np.degrees(np.arctan(coef)) > 15 and np.degrees(np.arctan(coef)) < 30:
-        print(f"Angulo maior que 15° e menor que 30° em {data_BTC[i]}")
-        contador += 1
-print(f"Ocorre {contador} vezes!")
-print(f"Em {100 * (contador/2001)} % do tempo")
-'''
 #dividino os intervalos para verificar o que ocorre
 
 inicio = 0 #4 * (int)

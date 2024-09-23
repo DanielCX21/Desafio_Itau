@@ -56,9 +56,7 @@ def resolve_sistema(pontos):
 
 def pontos_inflexao(pontos):
 
-
     sol = resolve_sistema(pontos)
-
     #intervalo analisado [[1,y1],[3,y2]]
 
     if sol[0] == 0:
