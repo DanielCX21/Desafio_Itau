@@ -42,8 +42,8 @@ Vamos pegar a cada 3 pontos e interpolar o polinomio cubico para
 cada intervalo por ex:
 pontos: [1,2,3]:
 pol: y = ax3 + bx2 + cx + d
-seg_der: y = 6ax + b
-pontos de inflexão: x = -3a / b
+seg_der: y = 6ax + 2b
+pontos de inflexão: x = -a / 3b
 Marcar no grafico do preço e no medo
 Estratégia simétrica!
 Teste:
