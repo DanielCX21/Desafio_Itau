@@ -67,3 +67,9 @@ Por Agora:
 3) Verificar quantos dias passamos longe do neutro (*)
 4) Juntar os dois primeiros
 5) Média móvel de 50 dias no volume (*)
+
+25/09/2024
+Vamos estabelecer entre os critérios acima mencionados pesos, assim teremos pontos
+muito suscetíveis a fazer a compra e pontos em que não faz sentido, pois as condições
+não são favoráveis. Testaremos aonde as condições se adaptam melhor para escolher
+os melhores pesos possíveis.

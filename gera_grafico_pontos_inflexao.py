@@ -2,6 +2,7 @@ import numpy as np
 from analise_BTC import medo_BTC
 import interpolador
 import matplotlib.pyplot as plt
+from scipy.interpolate import CubicSpline
 
 precisao = 100
 x_pontos = np.arange(2,2000,dtype=int)
@@ -37,6 +38,16 @@ na curva principal sempre
 plt.plot(x_suave,y_suave,color='blue')
 plt.scatter(ponto_inflexao_x,y_inflexao,color='red')
 plt.grid(True)
+
+'''
+eixo_x_medo = np.arange(0,2001,1)
+eixo_x_suave = np.linspace(0,2001,len(eixo_x_medo) * 100)
+cs = CubicSpline(eixo_x_medo, medo_BTC)
+plt.scatter(eixo_x_medo,medo_BTC,color='yellow')
+eixo_y_suave = cs(eixo_x_suave)
+plt.plot(eixo_x_suave,eixo_y_suave,color='red')
+'''
+
 plt.show()
 
 '''
@@ -44,8 +55,8 @@ Vamos pegar a cada 3 pontos e interpolar o polinomio cubico para
 cada intervalo por ex:
 pontos: [1,2,3]:
 pol: y = ax3 + bx2 + cx + d
-seg_der: y = 6ax + 2b
-pontos de inflexão: x = -a / 3b
+seg_der: y = 6ax + b
+pontos de inflexão: x = -3a / b
 Marcar no grafico do preço e no medo
 Estratégia simétrica!
 Teste:
