@@ -73,3 +73,10 @@ Vamos estabelecer entre os critérios acima mencionados pesos, assim teremos pon
 muito suscetíveis a fazer a compra e pontos em que não faz sentido, pois as condições
 não são favoráveis. Testaremos aonde as condições se adaptam melhor para escolher
 os melhores pesos possíveis.
+
+30/09/2024
+Como agrupar todas as informações de forma a se conectar com o problema original?
+Uma possibilidade é calcular todas as vezes e encontrar os melhores valores na mão.
+Outra abordagem é ir reduzindo a pequenos problemas que serão mais facilmente
+resolvidos. De forma que tenhamos no final algo humanamente ruim, porém computacionalmente 
+viável e numéricamente acessível.

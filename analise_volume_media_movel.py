@@ -24,6 +24,7 @@ for i, data in enumerate(data_BTC):
         media_to_dado.append(media_to)
         media_to = 0
         media_from = 0
+'''
         if volume_from_BTC[i] > media_from_dado[i-20] * 1.25:
             print(f"Em {data} o volume_from foi maior 25% que a média")
             contador_from += 1
@@ -33,6 +34,7 @@ for i, data in enumerate(data_BTC):
 
 print(f"Dias que o volume from ficou 25% acima: {contador_from}")
 print(f"Dias que o volume to ficou 25% acima: {contador_to}")
+'''
 
 '''
 #plotando o gráfico para volume from
