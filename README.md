@@ -80,3 +80,11 @@ Uma possibilidade é calcular todas as vezes e encontrar os melhores valores na 
 Outra abordagem é ir reduzindo a pequenos problemas que serão mais facilmente
 resolvidos. De forma que tenhamos no final algo humanamente ruim, porém computacionalmente 
 viável e numéricamente acessível.
+
+02/10/2024
+VolumeFROM -> Número total de unidades da moeda(fsym) transacionada no candle.
+VolumeTO -> Número total de moeda base(tsym) transacionado no candle.
+Divida to/from e veja um valor entre high e low no candle, pois dará um 
+preço "médio" de uma média obtida atráves de todo o "preço do candle"
+dividido por quantas moedas(fsym) passaram por ele. Assim, o volumeTO é 
+o melhor para verificar pontos de alta liquidação. 

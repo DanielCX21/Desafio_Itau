@@ -10,12 +10,14 @@ media_from = 0
 contador_to = 0
 contador_from = 0
 
+periodo = 20
+
 for i, data in enumerate(data_BTC):
     dias += 1
-    if dias < 20:
+    if dias < periodo:
         pass
     else:
-        for j in range(20):
+        for j in range(periodo):
             media_from += volume_from_BTC[i - j]
             media_to += volume_to_BTC[i - j]
         media_to = media_to / 20
@@ -24,6 +26,7 @@ for i, data in enumerate(data_BTC):
         media_to_dado.append(media_to)
         media_to = 0
         media_from = 0
+        
 '''
         if volume_from_BTC[i] > media_from_dado[i-20] * 1.25:
             print(f"Em {data} o volume_from foi maior 25% que a média")
