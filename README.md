@@ -88,3 +88,53 @@ Divida to/from e veja um valor entre high e low no candle, pois dará um
 preço "médio" de uma média obtida atráves de todo o "preço do candle"
 dividido por quantas moedas(fsym) passaram por ele. Assim, o volumeTO é 
 o melhor para verificar pontos de alta liquidação. 
+Geramos o RSI para fazer sinais de compra e venda e o de volume para sinal 
+de operação (tanto faz compra e venda)!
+Agora vamos analisar usando uma fórmula de previsão de preço achada através 
+da resolução da eq dif da resistência do ar:
+
+P(t) = P0 ( 1 + a * (G - F) * e ^ (b * t))
+
+Que seria a posição ao resolver a equação dif da resistência do ar!
+
+Para encontrar os valores de a e b vamos testar os melhores em um grande range 
+de valores e a estratégia será a seguinte:
+
+1°) Encontrar um bom ponto de entrada a partir de volume, RSI, e medo e ganância
+2°) Prever o preço tanto para short quanto para long
+3°) Colocar a ordem de venda a partir da previsão de um período de tempo
+4°) Verificar se após o período de tempo especificado a ordem foi batida analisando 
+todos os máximos(em caso de long) e todos os mínimos(em caso de short)
+5°) Colocar um marcador para saber se já estou comprado ou vendido naquele ativo, assim
+não podemos fazer operações com ele.
+
+Problemas, sugestões e reflexões:
+
+* Vamos trabalhar com diversos ativos, como fazer a ponderação?
+-Podemos usar o market cap, mas para isso será nescessário outra requisição
+em API para gerar os dados.
+-Podemos usar algum índice de volatilidade, mas para isso será nescessário pesquisar
+sobre os índices de volatilidade.
+-Podemos usar valores arbitrários pensados atráves do bom senso(melhor opção, o bom senso
+nunca nos trái).
+-Podemos testar vários tipos de valores e ver o que melhor se encaixa para o futuro, porém 
+tal estratégia não exclui a possibilidade de que resultado passado não é garantia de resultado futuro
+e essa métrica não possui nenhuma analogia direta com o fenômeno em si.
+
+* Como achar o melhor período de tempo?
+-Podemos testar alguns períodos de tempo e ver o que melhor se encaixa.
+Nesse caso não é igual ao último item da pergunta anterior, pois encontrariamos algo intrínseco 
+ao ativo. Que é o melhor "timeframe" para se operar tal estratégia que ai sim possui um fundamento
+por trás para ser estudada.
+-Podemos arbitrar algum período de tempo?
+-Sim, mas corremos o risco de perder a oportunidade de encontrar um "timeframe" muito bom 
+para a estratégia.
+
+* Os tempos serão somentes inteiros pela própria construção da fórmula, buscaremos uma previsão do 
+preço após tantos dias, porém esse preço pode ser alcançado antes e não importa quando será 
+alcançado desde que seja antes do tempo previsto, já que venderemos no preço de interesse.
+
+* Sobre a afirmação anterior, caso o ativo atinja o alvo antes e atinjo outro alvo de operação
+compraríamos novamente ou ficaríamos nesse ciclo de "x" dias.
+-Nesse caso, fica claro que não é interessante estar em um ciclo de "x" dias já que estaríamos
+perdendo muito potencial.

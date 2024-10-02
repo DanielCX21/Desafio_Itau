@@ -28,6 +28,7 @@ def rsi(abertura,fechamento,periodo):
     return R_S_I
 
 def sinal_compra_venda(RSI,data, periodo):
+    #gera sinal de compra ou venda
     datas = data[periodo:]
     registros = []
     for i, dat in enumerate(datas):

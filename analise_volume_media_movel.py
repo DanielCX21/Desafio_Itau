@@ -27,6 +27,20 @@ for i, data in enumerate(data_BTC):
         media_to = 0
         media_from = 0
         
+def gerar_sinal_compra_venda(fator, data, media_volume, volume):
+    #gera sinal de operação, tanto faz ser compra e venda!
+    fator = 1 + (fator / 100)
+    registros_compra_venda = []
+    volumes = volume[(periodo - 1):]
+    datas = data[(periodo - 1):]
+    for i, dat in enumerate(datas):
+        if volumes[i] > fator * media_volume[i]:
+            registro = {"data": dat, "sinal" : 1}
+        else:
+            registro = {"data": dat, "sinal" : 0}
+        registros_compra_venda.append(registro)
+    return registros_compra_venda
+
 '''
         if volume_from_BTC[i] > media_from_dado[i-20] * 1.25:
             print(f"Em {data} o volume_from foi maior 25% que a média")
