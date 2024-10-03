@@ -188,3 +188,13 @@ análise, o mesmo para o short.
 Assim, a melhor forma é verificar nos intervalos dados quando prevemos um long que não foi atingido
 até onde o ativo foi. Esse "checkpoint" será medido e faremos algum tipo de média que se encaixe 
 melhor nos nossos objetivos.
+
+Como prever grandes pumps ou dumps?
+
+* Uma solução possível é aumentar o valor do k da primeira exponencial e aumentar o valor da margem, 
+assim teremos a possibilidade de saídas parciais.
+Apostaremos sempre em um grande pump ou dump e teremos uma boa margem para se proteger.
+A margem pode ser proporcional ao feg_index também, já que entrar em um trade com alta ganância tem um 
+alto risco.
+
+Podemos também(e devemos) definir um stop loss para sair do trade independente das condições!
