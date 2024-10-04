@@ -16,16 +16,14 @@ def rsi(abertura,fechamento,periodo):
         else:
             for j in range(periodo):
                 if fechamento[i - j] > abertura[i - j]:
-                    ganhos += fechamento[i - j] - abertura[i - j]
+                    ganhos += np.fabs(fechamento[i - j] - abertura[i - j])
                 else:
-                    perdas += abertura[i - j] - fechamento[i - j] 
-
+                    perdas += np.fabs(abertura[i - j] - fechamento[i - j]) 
             R_S = ganhos / perdas
             RSI_1 = (100 * R_S) / (1 + R_S)
-
             R_S_I.append(RSI_1) 
-
     return R_S_I
+#len(R_S_I) = len(abertura) - periodo + 1
 
 def sinal_compra_venda(RSI,data, periodo):
     #gera sinal de compra ou venda
