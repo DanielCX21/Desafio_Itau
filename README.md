@@ -198,3 +198,6 @@ A margem pode ser proporcional ao feg_index também, já que entrar em um trade 
 alto risco.
 
 Podemos também(e devemos) definir um stop loss para sair do trade independente das condições!
+
+
+ericviado
