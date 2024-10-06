@@ -1,9 +1,34 @@
-import ordem_de_compra_venda
-import analise_BTC
-import regressao_linear
-import analise_volume_media_movel
+import dados
+import funcoes
 
-#print(len(regressao_linear.coefs_angular)) = 1998
+periodo = 14
+rsi = funcoes.rsi(dados.preco_open,dados.preco_close,periodo)
 
-for i in range(len(regressao_linear.coefs_angular)):
-    pass
+def backtest(timeframe, sinal, rsi):
+    estou_comprado = False
+    #manipular dentro da funcao
+    for i, dicionario in sinal:
+        if dicionario['sinal'] == 1 and not estou_comprado:
+            estou_comprado = True
+            #compra
+        else:
+            if dicionario['sinal'] == -1 and estou_comprado:
+                pass
+                #venda
+            else:
+                pass
+                #passa
+    return (primeiro_k,segundo_k,patrimonio)
+
+#testar os 3 parametros:
+#primeiro k (1e5)
+#segundo k (1e5)
+#timeframe (2 até 5)
+
+for i in range(100000):
+    #ajustar casas decimais dos k's
+    i = i / 10000
+    for j in range(100000):
+        j = j / 10000
+        for k in range(2,6):
+            info = backtest(k,,rsi)
