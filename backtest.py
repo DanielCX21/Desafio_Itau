@@ -5,6 +5,8 @@ periodo = 14
 rsi = funcoes.rsi(dados.preco_open,dados.preco_close,periodo)
 
 def backtest(timeframe, sinal, rsi):
+#type(sinal) = list of dict
+    patrimonio = 1000
     estou_comprado = False
     #manipular dentro da funcao
     for i, dicionario in sinal:
