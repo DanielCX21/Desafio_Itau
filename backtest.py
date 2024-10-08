@@ -4,6 +4,15 @@ import funcoes
 periodo = 14
 rsi = funcoes.rsi(dados.preco_open,dados.preco_close,periodo)
 
+def compra(data,data_inicial,preco_inicial,preco_maximo,previsao_final,previsao_parcial,patrimonio,timeframe):
+    quantidade = patrimonio / preco_inicial
+    for i in range(timeframe):
+        if preco_maximo[i] > previsao_final:
+            return data[i], quantidade*previsao_final
+    
+
+    return data_final, patrimonio
+
 def backtest(timeframe, sinal, rsi):
 #type(sinal) = list of dict
     patrimonio = 1000
@@ -34,3 +43,4 @@ for i in range(100000):
         j = j / 10000
         for k in range(2,6):
             info = backtest(k,,rsi)
+
