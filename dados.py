@@ -12,6 +12,8 @@ volume_to= list()
 volume_from = list()
 preco_open = list()
 preco_close = list()
+preco_high = list()
+preco_low = list()
 data = list()
 
 for valor in lista_dados:
@@ -28,6 +30,12 @@ for valor in lista_dados:
 
 for valor in lista_dados:
     preco_close.append(valor['close'])
+
+for valor in lista_dados:
+    preco_high.append(valor['high'])
+
+for valor in lista_dados:
+    preco_low.append(valor['low'])
 
 for valor in lista_dados:
     dat = transform_data.unix_dh(valor['time'])

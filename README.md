@@ -201,3 +201,26 @@ Podemos também(e devemos) definir um stop loss para sair do trade independente 
 
 06/10/2024
 Refatoração para os testes dos parâmetros do backtest!
+
+09/10/2024
+
+Uma grande parte já feita da parte mais dificill, temos agora que ajustar a ordem das condições na função
+de compra para contemplar de forma certa cada caso analisado. O nosso timeframe será de mais de um dia e
+nossa análise no tempo diário, não importando o que ocorre dentro da vela diária.
+Devemos ter cuidado para não inventar uma estratégia que funciona com condições futurísitcas como por exemplo,
+o ponto de máximo ou mínimo da vela. Devemos levar em conta os parâmetros absolutos da vela: abertura e fechamento
+que sempre ocorrerão no mesmo horário e montar nosso trade system a partir dele. Os dados de máximo e mínimo 
+que serão utilizados devem estar somente para observação dos fatos, não para comparação.
+Como já discutido anteriormente, iremos ter um ponto de saída parcial baseado em uma constante da diferença
+dos preços, assim poderemos aproveitar os grandes "pumps", mas fica a questão novamente:
+
+*Iremos aproveitar de fato(?).
+
+A resposta para essa pergunta não é simples, a constante utilizada vai medir tal fator, mas ainda assim 
+poderemos ter uma constante que mede melhor os pumps e outra que consegue ganhar mais dinheiro. Da mesma
+forma, iremos avaliar para outros períodos e verificar quais são as melhores constantes. Iremos avaliar
+a estratégia contra o HODL em alguns períodos e podemos até tirar algumas previsões do futuro:
+*A estratégia desempenha bem no inverno?
+*A estratégia ganha em um ciclo completo?
+*A estratégia ganha se aplicada em qualquer ponto do ciclo?
+Todas essas perguntas devem ser respondidas com um backtest bem executado.
