@@ -2,10 +2,8 @@ import dados
 import regressao_linear as regressao_linear
 import numpy as np
 import matplotlib.pyplot as plt
-#from mpl_toolkits.mplot3d import Axes3D
 
 estou_comprado = False
-patrimonio = 1
 preco = dados.preco_close
 medo = dados.medo
 angulos = regressao_linear.angulos_data
@@ -38,10 +36,11 @@ Z = np.zeros(X.shape)
 
 for i in range(X.shape[0]):
     for j in range(X.shape[1]):
-        Z[i, j] = backtest(datas, angulos, X[i, j], Y[i, j], estou_comprado, patrimonio)
+        Z[i, j] = backtest(datas, angulos, X[i, j], Y[i, j], estou_comprado, 1)
 
 print(Z.max())
 
+'''
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.plot_surface(X, Y, Z, cmap='viridis')
@@ -49,3 +48,4 @@ ax.set_xlabel('param1')
 ax.set_ylabel('param2')
 ax.set_zlabel('Patrimônio final')
 plt.show()
+'''

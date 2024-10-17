@@ -1,7 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import dados
-#import interpolador
 from scipy.interpolate import CubicSpline
 
 parametro = 4
@@ -10,21 +8,17 @@ medo_BTC = dados.medo
 y_interpolar = list()
 x_interpolar = list(range(1,parametro + 1))
 coefs_angular = list()
-coefs_linear = list()
-contador = 0
 
 for i in range(len(medo_BTC) - parametro + 1):
     for j in range(parametro):
         y_interpolar.append(medo_BTC[i+j])
     angular = float(np.polyfit(x_interpolar,y_interpolar,1)[0])
-    linear = float(np.polyfit(x_interpolar,y_interpolar,1)[1])
     coefs_angular.append(angular)
-    coefs_linear.append(linear)
     y_interpolar.clear()
 
 angulos_data = list()
 
-for i,coef in enumerate(coefs_angular):
+for coef in coefs_angular:
     informacao = float(np.fabs(np.degrees(np.arctan(coef))))
     angulos_data.append(informacao)
 
