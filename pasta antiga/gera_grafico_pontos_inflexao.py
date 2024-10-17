@@ -1,6 +1,6 @@
 import numpy as np
 from analise_BTC import medo_BTC
-import interpolador
+import programas_apoio_reglin.interpolador as interpolador
 import matplotlib.pyplot as plt
 from scipy.interpolate import CubicSpline
 

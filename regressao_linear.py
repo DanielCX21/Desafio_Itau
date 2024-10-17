@@ -4,16 +4,16 @@ import dados
 #import interpolador
 from scipy.interpolate import CubicSpline
 
+parametro = 4
+
 medo_BTC = dados.medo
 y_interpolar = list()
-x_interpolar = [1,2,3,4]
+x_interpolar = list(range(1,parametro + 1))
 coefs_angular = list()
 coefs_linear = list()
 contador = 0
 
-parametro = 4
-
-for i in range(1998):
+for i in range(len(medo_BTC) - parametro + 1):
     for j in range(parametro):
         y_interpolar.append(medo_BTC[i+j])
     angular = float(np.polyfit(x_interpolar,y_interpolar,1)[0])
@@ -28,6 +28,7 @@ for i,coef in enumerate(coefs_angular):
     informacao = float(np.fabs(np.degrees(np.arctan(coef))))
     angulos_data.append(informacao)
 
+#print(len(angulos_data)) = 1999 = 2001 - 2
 
 '''
 #dividino os intervalos para verificar o que ocorre

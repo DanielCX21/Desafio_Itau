@@ -228,3 +228,36 @@ Todas essas perguntas devem ser respondidas com um backtest bem executado.
 16/10/2024
 
 Após dias iremos testar a estratégia da regressão linear do gráfico de medo e ganância.
+
+17/10/2024
+
+Estamos desenvolvendo após muitos testes com estratégias variadas a ideia da interpolação dos pontos
+do gráfico de medo e ganância:
+Ao interpolar o gráfico de medo e ganância encontraremos os possíveis pontos de compra e venda baseado 
+no ângulo da reta de regressão linear.
+
+A partir disso, vamos fazer a arctg e [-90°,90°] pegar seu módulo.
+
+As vendas serão feitas na ganância e as compras no medo.
+
+Precisamos implementar o mecanismo de short para operar na ponta da compra.
+
+Revisar o método de obtenção do patrimônio.
+
+Testes para serem analisados:
+
+* Comparação da estratégia com um trade aleatório. SIM, trades aleatórios e ver o quão fácil é ganhar 
+dinheiro com BTC.
+
+* Comparação da estratégia com uma boa entrada no inverno e uma boa saída na bull run.
+
+* Comparação da estratégia com um ciclo de 4 anos.
+
+* Pegar os parâmetros para outros intervalos de tempo.
+
+* Verificar a linearidade do parâmetro.
+
+* Verificar o parâmetro mais seguro.
+
+Mas... Antes de tudo isso, precisamos deixar o backtest muito preciso e genérico.
+Para que todos os testes possam ser feitos com segurança e escalabilidade.

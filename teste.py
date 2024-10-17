@@ -1,28 +1,38 @@
+import dados
+import regressao_linear as regressao_linear
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+#from mpl_toolkits.mplot3d import Axes3D
+from backtest_reglin import a,b
 
-# Definindo a função f(x, y)
-def f(x, y):
-    return np.sin(np.sqrt(x**2 + y**2))
+estou_comprado = False
+patrimonio = 1
+preco = dados.preco_close
+medo = dados.medo
+angulos = regressao_linear.angulos_data
+datas = dados.data
 
-# Criando a grade de pontos (x, y)
-x = np.linspace(-5, 5, 100)  # 100 pontos no intervalo [-5, 5]
-y = np.linspace(-5, 5, 100)
-X, Y = np.meshgrid(x, y)      # Criar a malha de coordenadas
-Z = f(X, Y)                   # Avaliar a função em cada ponto da malha
+def compras(situacao,patrimonio, preco):
+    quantidade = patrimonio / preco
+    situacao = True
+    tupla = (situacao,quantidade)
+    return tupla
+def vendas(situacao,quantidade, preco):
+    patrimonio_final = quantidade * preco
+    situacao = False
+    tupla = (situacao,patrimonio_final)
+    return tupla
 
-# Criando a figura e o eixo 3D
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+def backtest(datas, angulo, param1, param2, situacao, patrimonio):
+    translacao = regressao_linear.parametro - 1
+    for i in range(len(datas) - translacao):
+        if not situacao and angulo[i] < (90 * param1) and medo[i + translacao] >= 0:
+            situacao, quantidade = compras(situacao,patrimonio,dados.preco_close[i + translacao])
+            #print(f"comprei: {datas[i + translacao]}")
+        if situacao and angulo[i] < (90 * param2) and medo[i + translacao] < 0:
+            situacao, patrimonio = vendas(situacao,quantidade,dados.preco_close[i + translacao])
+            #print(f"vendi: {datas[i + translacao]}")
+            #print(patrimonio)
+    return patrimonio
 
-# Plotar a superfície 3D
-ax.plot_surface(X, Y, Z, cmap='viridis')
-
-# Adicionando rótulos aos eixos
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
-ax.set_zlabel('f(X, Y)')
-
-# Exibir o gráfico
-plt.show()
+print(backtest(dados.data,angulos,a,b,estou_comprado,1))
