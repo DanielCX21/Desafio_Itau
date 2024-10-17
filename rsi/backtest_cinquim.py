@@ -1,5 +1,5 @@
 import dados
-import funcoes
+import rsi.funcoes as funcoes
 import numpy as np
 
 periodo = 14

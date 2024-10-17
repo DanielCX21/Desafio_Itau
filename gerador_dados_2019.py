@@ -1,14 +1,14 @@
 import requests
 import json
 from datetime import datetime, timezone
-import funcoes
+import transform_data
 
 lista = []
 linkMatriz = "https://min-api.cryptocompare.com/data/v2/histoday?"
 fsym = "ETH"
 tsym = "USD"
 limit = 2000
-toTs_unix = funcoes.dh_unix("11/09/2024")
+toTs_unix = transform_data.dh_unix("11/09/2024")
 link = linkMatriz + "fsym=" + fsym + "&" + "tsym=" + tsym + "&" + "limit=" + str(limit) + "&" + "toTs=" + str(toTs_unix)
 print(link)
 

@@ -224,3 +224,7 @@ a estratégia contra o HODL em alguns períodos e podemos até tirar algumas pre
 *A estratégia ganha em um ciclo completo?
 *A estratégia ganha se aplicada em qualquer ponto do ciclo?
 Todas essas perguntas devem ser respondidas com um backtest bem executado.
+
+16/10/2024
+
+Após dias iremos testar a estratégia da regressão linear do gráfico de medo e ganância.

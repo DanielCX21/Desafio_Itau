@@ -1,5 +1,5 @@
 import json
-import funcoes
+import rsi.funcoes as funcoes
 
 with open('dados_candles.json', 'r') as json_file:
     lista_dados = json.load(json_file)

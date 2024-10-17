@@ -1,17 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from analise_BTC import medo_BTC
-import interpolador
+import dados
+#import interpolador
 from scipy.interpolate import CubicSpline
 
+medo_BTC = dados.medo
 y_interpolar = list()
 x_interpolar = [1,2,3,4]
 coefs_angular = list()
 coefs_linear = list()
 contador = 0
 
+parametro = 4
+
 for i in range(1998):
-    for j in range(4):
+    for j in range(parametro):
         y_interpolar.append(medo_BTC[i+j])
     angular = float(np.polyfit(x_interpolar,y_interpolar,1)[0])
     linear = float(np.polyfit(x_interpolar,y_interpolar,1)[1])
@@ -19,6 +22,14 @@ for i in range(1998):
     coefs_linear.append(linear)
     y_interpolar.clear()
 
+angulos_data = list()
+
+for i,coef in enumerate(coefs_angular):
+    informacao = float(np.fabs(np.degrees(np.arctan(coef))))
+    angulos_data.append(informacao)
+
+
+'''
 #dividino os intervalos para verificar o que ocorre
 
 inicio = 0 #4 * (int)
@@ -32,7 +43,7 @@ for i in range((int(inicio / 4)),(int(fim / 4))):
         y = interpolador.reta(coefs_angular[i * 4],coefs_linear[i * 4],j)
         eixo_y_primeiro.append(y)
         eixo_x_primeiro.append(4 * i + j)
-plt.plot(eixo_x_primeiro,eixo_y_primeiro,color='pink')
+#plt.plot(eixo_x_primeiro,eixo_y_primeiro,color='pink')
 
 #segundo ROXO
 eixo_x_segundo = list()
@@ -42,7 +53,7 @@ for i in range((int(inicio / 4)),(int(fim / 4))):
         y = interpolador.reta(coefs_angular[i * 4 + 1],coefs_linear[i * 4 + 1],j)
         eixo_y_segundo.append(y)
         eixo_x_segundo.append(4 * i + j)
-plt.plot(eixo_x_segundo,eixo_y_segundo,color='purple')
+#plt.plot(eixo_x_segundo,eixo_y_segundo,color='purple')
 
 #terceiro AZUL
 eixo_x_terceiro = list()
@@ -52,7 +63,7 @@ for i in range((int(inicio / 4)),(int(fim / 4))):
         y = interpolador.reta(coefs_angular[i * 4 + 2],coefs_linear[i * 4 + 2],j)
         eixo_y_terceiro.append(y)
         eixo_x_terceiro.append(4 * i + j)
-plt.plot(eixo_x_terceiro,eixo_y_terceiro,color='blue')
+#plt.plot(eixo_x_terceiro,eixo_y_terceiro,color='blue')
 
 #quarto VERDE
 eixo_x_quarto = list()
@@ -62,7 +73,7 @@ for i in range((int(inicio / 4)),(int(fim / 4))):
         y = interpolador.reta(coefs_angular[i * 4 + 3],coefs_linear[i * 4 + 3],j)
         eixo_y_quarto.append(y)
         eixo_x_quarto.append(4 * i + j)
-plt.plot(eixo_x_quarto,eixo_y_quarto,color='green')
+#plt.plot(eixo_x_quarto,eixo_y_quarto,color='green')
 
 #plotar o gráfic junto
 eixo_x_medo = np.arange(0,2001,1)
@@ -73,3 +84,4 @@ plt.plot(eixo_x_suave,eixo_y_suave,color='red')
 
 plt.grid(True)
 plt.show()
+'''
