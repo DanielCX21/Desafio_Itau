@@ -261,3 +261,8 @@ dinheiro com BTC.
 
 Mas... Antes de tudo isso, precisamos deixar o backtest muito preciso e genérico.
 Para que todos os testes possam ser feitos com segurança e escalabilidade.
+
+17/10/2024 A Tarde:
+
+Arrumar o código do backtest final com a estratégia da curva para começar a plotar 
+os gráficos e fazer as simulações.

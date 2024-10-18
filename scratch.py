@@ -1,13 +1,16 @@
-import numpy as np
+data = [9,8,7,6,5,4,3,2,1]
 
-# Exemplo de matriz
-matriz = np.array([[1, 5, 3], [8, 2, 6], [4, 7, 9]])
+vetor = [1,2,3,4,5,6,7,8,9]
 
-# Encontrar o valor máximo
-max_valor = np.max(matriz)
+parametro = 5
 
-# Encontrar o índice do valor máximo
-indice_max = np.unravel_index(np.argmax(matriz), matriz.shape)
+inicio_index = int((parametro + 1) / 2) - 1
+fim_index = int(((2 * len(data)) - 1 - parametro) / 2) + 1
 
-print(f"Valor máximo: {max_valor}")
-print(f"Índice do valor máximo: {indice_max}")
+#ja sei q é inteiro
+
+print(vetor)
+
+vetor = vetor[inicio_index:fim_index]
+
+print(vetor)

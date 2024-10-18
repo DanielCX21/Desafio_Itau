@@ -27,23 +27,25 @@ def vendas(situacao,quantidade, preco):
 def backtest(datas, angulo, param1, param2, situacao, patrimonio):
     translacao = (parametro) - 1
     for i in range(len(datas) - translacao):
-        if not situacao and angulo[i] < (90 * param1) and medo[i + translacao] >= 0:
-            situacao, quantidade = compras(situacao,patrimonio,dados.preco_close[i + translacao])
-        if situacao and angulo[i] < (90 * param2) and medo[i + translacao] < 0:
-            situacao, patrimonio = vendas(situacao,quantidade,dados.preco_close[i + translacao])
+        if not situacao and angulo[i] < (90 * param1) and medo[i + translacao] <= 0:
+            situacao, quantidade = compras(situacao,patrimonio,preco[i + translacao])
+        if situacao and angulo[i] < (90 * param2) and medo[i + translacao] > 0:
+            situacao, patrimonio = vendas(situacao,quantidade,preco[i + translacao])
+    if situacao:
+        patrimonio = quantidade * preco[-1]
     return patrimonio
 
 x = np.linspace(0, 1, 100)  
 y = np.linspace(0, 1, 100)
 X, Y = np.meshgrid(x, y)
-Z = np.zeros(X.shape)
 maximos = list()
 angulos = list()
+Z = np.zeros(X.shape)
 
-for i in range(2,timeframe + 1):
+
+for k in range(2,timeframe + 1):
     estou_comprado = False
-
-    parametro = i
+    parametro = k
     x_interpolar = list(range(1,parametro + 1))
 
     for i in range(len(medo) - parametro + 1):
@@ -59,12 +61,15 @@ for i in range(2,timeframe + 1):
 
     for i in range(X.shape[0]):
         for j in range(X.shape[1]):
-            Z[i, j] = backtest(datas, angulos, X[i, j], Y[i, j], estou_comprado, patrimonio)
+            Z[i, j] = backtest(datas, angulos, X[i, j], Y[i, j], estou_comprado, 1)
     maximos.append(Z.max())
     print(Z.max())
 
     angulos.clear()
     x_interpolar.clear()
+    coefs_angular.clear()
+    Z = np.zeros(X.shape)
+    
     
 maximo_x = list(range(0,len(maximos)))
 

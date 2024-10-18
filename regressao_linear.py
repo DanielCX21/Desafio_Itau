@@ -4,25 +4,43 @@ from scipy.interpolate import CubicSpline
 
 parametro = 4
 
-medo_BTC = dados.medo
+medo = dados.medo
+datas = dados.data
 y_interpolar = list()
 x_interpolar = list(range(1,parametro + 1))
 coefs_angular = list()
 
-for i in range(len(medo_BTC) - parametro + 1):
+for i in range(len(medo) - parametro + 1):
     for j in range(parametro):
-        y_interpolar.append(medo_BTC[i+j])
+        y_interpolar.append(medo[i+j])
     angular = float(np.polyfit(x_interpolar,y_interpolar,1)[0])
     coefs_angular.append(angular)
     y_interpolar.clear()
+#tenho os coefs angulares. Agora vamos colocar "em fase" com o medo.
 
-angulos_data = list()
+inicio_index = int((parametro + 1) / 2) - 1
+fim_index = int(((2 * len(datas)) - 1 - parametro) / 2) + 1
+
+medo = medo[inicio_index:fim_index]
+
+print(len(medo))
+
+angulos = list()
 
 for coef in coefs_angular:
     informacao = float(np.fabs(np.degrees(np.arctan(coef))))
-    angulos_data.append(informacao)
+    angulos.append(informacao)
 
-#print(len(angulos_data)) = 1999 = 2001 - 2
+print(len(angulos))
+
+#print(len(angulos_data)) = len(data) - parametro + 1
+#começo a iterar a partir do primeiro elemento e termino no ultimo - parametro
+#qual é o range valido para fazer as análises?
+#para 3 pontos vale dos indices 1 até (len(data) - 1 - 1)
+#usando um timeframe qualquer: [1,2,3,4...1999,2000] => [1,2...n],[2,3...n + 1]... [2000-(n-1)...1999,2000] com 2001 - parametro + 1 elementos
+#quando temos termo central, estamos pegando a melhor aproximação e ai a série valeria de (1 + n)/2 até (4001 - n)/2 para isso, n deve ser ímpar.
+#para n par, basta pegar o elemento sucessor ou o antecessor. Não é relevante
+
 
 '''
 #dividino os intervalos para verificar o que ocorre
