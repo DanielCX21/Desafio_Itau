@@ -25,8 +25,10 @@ def backtest(datas, angulo, param1, param2, situacao, patrimonio):
     for i in range(len(datas) - translacao):
         if not situacao and angulo[i] < (90 * param1) and medo[i + translacao] >= 0:
             situacao, quantidade = compras(situacao,patrimonio,dados.preco_close[i + translacao])
+            #print(f"compra:{preco[i + translacao]}")
         if situacao and angulo[i] < (90 * param2) and medo[i + translacao] < 0:
             situacao, patrimonio = vendas(situacao,quantidade,dados.preco_close[i + translacao])
+            #print(f"Venda:{preco[i + translacao]}")
         if situacao:
             patrimonio = quantidade * preco[-1]
     return patrimonio
@@ -35,6 +37,7 @@ x = np.linspace(0, 1, 100)
 y = np.linspace(0, 1, 100)
 X, Y = np.meshgrid(x, y)
 Z = np.zeros(X.shape)
+
 
 for i in range(X.shape[0]):
     for j in range(X.shape[1]):
@@ -46,14 +49,13 @@ indice_maior_valor = np.unravel_index(np.argmax(Z), Z.shape)
 
 print(indice_maior_valor)
 
-#print(X[50,81])
-#print(Y[50,81])
+print(X[50,81])
+print(Y[50,81])
 
-print(Z.min())
+estou_comprado = False
 
-indice_menor_valor = np.unravel_index(np.argmin(Z), Z.shape)
 
-print(indice_menor_valor)
+print(backtest(datas, angulos, X[50,81], Y[50,81], estou_comprado, 1))
 
 
 fig = plt.figure()
@@ -63,4 +65,3 @@ ax.set_xlabel('param1')
 ax.set_ylabel('param2')
 ax.set_zlabel('Patrimônio final')
 plt.show()
-
