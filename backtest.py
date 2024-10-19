@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import dados
+import transform_data
 
 medo_inicial = 0
 
@@ -24,7 +25,6 @@ def compra_short(situacao,quantidade,preco, patrimonio):
     situacao = False
     tupla = (situacao,patrimonio_final)
     return tupla
-
 def backtest_sl(timeframe,situacao_long, situacao_short, angulo, datas, param1, param2, medo, patrimonio,preco):
     translacao = timeframe - 1
     for i in range(len(medo)):
@@ -51,7 +51,6 @@ def backtest_sl(timeframe,situacao_long, situacao_short, angulo, datas, param1, 
         patrimonio = (2 * patrimonio) - quantidade * preco[-1]
         #print(f"terminei vendido e vendi no último dia por {datas[i + translacao]}")
     return patrimonio
-
 def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco):
     contador = 0
     translacao = timeframe - 1
@@ -80,15 +79,24 @@ estou_comprado = False
 estou_vendido = False
 patrimonio = 1
 
-escolha_quantos_dias = int(input("Para quantos dias será a análise:"))
+escolha_data_inicial = str(input("Digite a data de inicio até 31/01/2018: "))
+#recebo string
 
-if escolha_quantos_dias > len(dados.lista_dados):
-    print(f"Será usado o limite de {len(dados.lista_dados)} dias.")
-
+if transform_data.dh_unix(escolha_data_inicial) < 1517443200:
+    print("Será usada a data limite de 31/01/2024")
+    inicio = 0
 else:
-    preco = preco[-escolha_quantos_dias:]
-    medo = medo[-escolha_quantos_dias:]
-    datas = datas[-escolha_quantos_dias:]
+    inicio = datas.index(escolha_data_inicial)
+
+escolha_data_final = str(input("Digite a data final até 11/09/2024: "))
+
+if transform_data.dh_unix(escolha_data_final) > 1726099200:
+    print("Será usada a data limite de 11/09/2024")
+    fim = len(datas) + 1
+else:
+    fim = datas.index(escolha_data_final) + 1
+
+datas = datas[inicio:fim]
 
 escolha_long_short = int(input("(Long)(1) x (Long+Short)(2):"))
 
