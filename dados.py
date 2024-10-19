@@ -43,4 +43,3 @@ for valor in lista_dados:
     data.append(dat)
 
 #Quantos dias passamos longe do neutro?
-#Todas as listas tem 2001 elementos

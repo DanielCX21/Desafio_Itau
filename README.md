@@ -278,3 +278,9 @@ O principal motivo é argumentar que nossa estratégia não é baseada em sorte.
 
 Agora basicamente devemos expandir a base de dados e simular os trades para várias
 situações de forma a encontrar o melhor param1 e param2!
+
+19/10/2024 Manhã:
+
+Não vamos fazer operações para o medo neutro.
+Ajustar o parâmetro dos ângulos no backtest e procurar parâmetros sólidos ao longo do tempo.
+Adicionar o parâmetro de quantos trades eu realizo nos testes.

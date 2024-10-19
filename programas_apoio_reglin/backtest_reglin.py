@@ -1,5 +1,5 @@
 import dados
-import regressao_linear as regressao_linear
+import programas_apoio_reglin.regressao_linear as regressao_linear
 import numpy as np
 import matplotlib.pyplot as plt
 
