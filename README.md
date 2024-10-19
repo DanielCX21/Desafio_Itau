@@ -266,3 +266,15 @@ Para que todos os testes possam ser feitos com segurança e escalabilidade.
 
 Arrumar o código do backtest final com a estratégia da curva para começar a plotar 
 os gráficos e fazer as simulações.
+
+18/10/2024:
+
+Programa criado para fazer as análises nescessárias.
+
+Também já temos o programa com os trades aleatórios. <-> Melhorar alguns parâmetros
+para poder encontrar bons resultados de sorte em trades.
+
+O principal motivo é argumentar que nossa estratégia não é baseada em sorte.
+
+Agora basicamente devemos expandir a base de dados e simular os trades para várias
+situações de forma a encontrar o melhor param1 e param2!

@@ -23,15 +23,13 @@ fim_index = int(((2 * len(datas)) - 1 - parametro) / 2) + 1
 
 medo = medo[inicio_index:fim_index]
 
-print(len(medo))
-
 angulos = list()
 
 for coef in coefs_angular:
     informacao = float(np.fabs(np.degrees(np.arctan(coef))))
     angulos.append(informacao)
 
-print(len(angulos))
+print(angulos)
 
 #print(len(angulos_data)) = len(data) - parametro + 1
 #começo a iterar a partir do primeiro elemento e termino no ultimo - parametro
