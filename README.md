@@ -288,3 +288,4 @@ Adicionar o parâmetro de quantos trades eu realizo nos testes.
 20/10/2024 Manhã:
 
 Adicionado programa visual que mostra as retas com as devidas regressões.
+Não esquecer de pensar como será dividido o portfólio.
