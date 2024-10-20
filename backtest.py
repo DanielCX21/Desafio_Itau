@@ -80,7 +80,6 @@ estou_vendido = False
 patrimonio = 1
 
 escolha_data_inicial = str(input("Digite a data de inicio até 31/01/2018: "))
-#recebo string
 
 if transform_data.dh_unix(escolha_data_inicial) < 1517443200:
     print("Será usada a data limite de 31/01/2024")
@@ -142,8 +141,14 @@ if escolha_long_short == 1:
             ax.set_zlabel('Patrimônio final')
             plt.show()
 
-            print(Z.max())
-            print(np.unravel_index(np.argmax(Z),Z.shape))
+            submatriz = Z[5:,5:]
+
+            print(submatriz.max())
+            indices = np.unravel_index(np.argmax(submatriz),submatriz.shape)
+            primeiro = indices[0] + 1
+            segundo = indices[1] + 1
+            print((primeiro,segundo))
+            print(backtest(parametro,estou_comprado,angulos,primeiro,segundo,medo,1,preco)[1])
 
             angulos.clear()
             Z = np.zeros(X.shape)
@@ -186,20 +191,26 @@ if escolha_long_short == 1:
                     for a in range(X.shape[0]):
                         for b in range(X.shape[1]):
                             Z[a, b] = backtest(time,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0]
-                    print(Z.max())
-                    print(np.unravel_index(np.argmax(Z),Z.shape))
+                    
+                    submatriz = Z[:5,:5]
 
-                    maximos.append({"timeframe":time,"maximo":Z.max(),"indices":np.unravel_index(np.argmax(Z),Z.shape)})
+                    print(submatriz.max())
+                    indices = np.unravel_index(np.argmax(submatriz),submatriz.shape)
+                    primeiro = indices[0] + 5
+                    segundo = indices[1] + 5
+                    print((primeiro,segundo))
+                    maximos.append({"timeframe":time,"maximo":Z.max(),"indices":(primeiro,segundo),"número de trades":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]})
 
                     angulos.clear()
                     Z = np.zeros(X.shape)
+                    submatriz = np.zeros(submatriz.shape)
                     x_interpolar.clear()
                     coefs_angular.clear()
-                    estou_comprado = False
 
                 eixo_x = list(range(3,parametro + 1))
 
-                print(maximos)
+                for max in maximos:
+                    print(max)
 
                 for maximo in maximos:
                     eixo_y.append(maximo['maximo'])

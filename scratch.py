@@ -1,8 +1,14 @@
-import numpy as np
 import matplotlib.pyplot as plt
-import json
-import transform_data
 
-print(transform_data.unix_dh(1517443200))
+colors = ["red", "blue", "pink", "purple"]
 
-print(transform_data.dh_unix(transform_data.unix_dh(1517443200)))
+x = [1,2,3]
+y = [1,2,3]
+
+for i in range(2):
+    x = [1,2,3]
+    y = [1 + i*i,2 + 2*i*i,3 + 3*i*i]
+    plt.plot(x, y, color=colors[i])
+
+# Exibir o gráfico
+plt.show()

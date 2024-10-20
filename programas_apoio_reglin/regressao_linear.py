@@ -29,8 +29,6 @@ for coef in coefs_angular:
     informacao = float(np.fabs(np.degrees(np.arctan(coef))))
     angulos.append(informacao)
 
-print(angulos)
-
 #print(len(angulos_data)) = len(data) - parametro + 1
 #começo a iterar a partir do primeiro elemento e termino no ultimo - parametro
 #qual é o range valido para fazer as análises?

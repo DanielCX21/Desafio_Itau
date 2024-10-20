@@ -284,3 +284,7 @@ situações de forma a encontrar o melhor param1 e param2!
 Não vamos fazer operações para o medo neutro.
 Ajustar o parâmetro dos ângulos no backtest e procurar parâmetros sólidos ao longo do tempo.
 Adicionar o parâmetro de quantos trades eu realizo nos testes.
+
+20/10/2024 Manhã:
+
+Adicionado programa visual que mostra as retas com as devidas regressões.
