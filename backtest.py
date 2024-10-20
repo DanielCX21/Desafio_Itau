@@ -96,6 +96,10 @@ else:
     fim = datas.index(escolha_data_final) + 1
 
 datas = datas[inicio:fim]
+preco = preco[inicio:fim]
+medo = medo[inicio:fim]
+#os 3 começam em fase quando declarados => continuam em fase agora.
+#os angulos serão definidos a partir desses dados.
 
 escolha_long_short = int(input("(Long)(1) x (Long+Short)(2):"))
 
@@ -129,6 +133,9 @@ if escolha_long_short == 1:
                 informacao = float(np.fabs(np.degrees(np.arctan(coef))))
                 angulos.append(informacao)
 
+            #print(len(angulos))
+            #print(len(datas))
+
             for a in range(X.shape[0]):
                 for b in range(X.shape[1]):
                     Z[a, b] = backtest(parametro,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0]
@@ -143,12 +150,12 @@ if escolha_long_short == 1:
 
             submatriz = Z[5:,5:]
 
-            print(submatriz.max())
             indices = np.unravel_index(np.argmax(submatriz),submatriz.shape)
-            primeiro = indices[0] + 1
-            segundo = indices[1] + 1
-            print((primeiro,segundo))
-            print(backtest(parametro,estou_comprado,angulos,primeiro,segundo,medo,1,preco)[1])
+            primeiro = indices[0] + 5
+            segundo = indices[1] + 5
+            print(f"Maximo: {submatriz.max()}. Confirmacao: {Z[primeiro,segundo]}")
+            print(f"Indices: {(primeiro,segundo)}. Parametros: {X[primeiro,segundo],Y[primeiro,segundo]}")
+            print(f"Numero de trades:{backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]}")
 
             angulos.clear()
             Z = np.zeros(X.shape)
