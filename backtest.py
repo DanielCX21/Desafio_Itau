@@ -82,7 +82,7 @@ patrimonio = 1
 escolha_data_inicial = str(input("Digite a data de inicio até 31/01/2018: "))
 
 if transform_data.dh_unix(escolha_data_inicial) < 1517443200:
-    print("Será usada a data limite de 31/01/2024")
+    print("Será usada a data limite de 31/01/2018")
     inicio = 0
 else:
     inicio = datas.index(escolha_data_inicial)
