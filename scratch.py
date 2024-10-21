@@ -1,14 +1,13 @@
-import matplotlib.pyplot as plt
+import numpy as np
 
-colors = ["red", "blue", "pink", "purple"]
+Z = np.array([[1,2,6],
+              [3,1,2],
+              [5,4,9]],dtype=float)
 
-x = [1,2,3]
-y = [1,2,3]
+tol = 1
 
-for i in range(2):
-    x = [1,2,3]
-    y = [1 + i*i,2 + 2*i*i,3 + 3*i*i]
-    plt.plot(x, y, color=colors[i])
+sub = Z[tol:,tol:]
 
-# Exibir o gráfico
-plt.show()
+print(Z)
+
+print(sub)

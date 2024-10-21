@@ -4,6 +4,7 @@ import dados
 import transform_data
 
 medo_inicial = 0
+tolerancia = 0
 
 def compras_long(situacao,patrimonio, preco):
     quantidade = patrimonio / preco
@@ -148,13 +149,13 @@ if escolha_long_short == 1:
             ax.set_zlabel('Patrimônio final')
             plt.show()
 
-            submatriz = Z[5:,5:]
+            submatriz = Z[tolerancia:,tolerancia:]
 
             indices = np.unravel_index(np.argmax(submatriz),submatriz.shape)
-            primeiro = indices[0] + 5
-            segundo = indices[1] + 5
-            print(f"Maximo: {submatriz.max()}. Confirmacao: {Z[primeiro,segundo]}")
+            primeiro = indices[0] + tolerancia
+            segundo = indices[1] + tolerancia
             print(f"Indices: {(primeiro,segundo)}. Parametros: {X[primeiro,segundo],Y[primeiro,segundo]}")
+            print(f"Maximo: {submatriz.max()}. Confirmacao: {Z[primeiro,segundo]}. Confirmacao: {backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)}")
             print(f"Numero de trades:{backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]}")
 
             angulos.clear()
@@ -198,15 +199,15 @@ if escolha_long_short == 1:
                     for a in range(X.shape[0]):
                         for b in range(X.shape[1]):
                             Z[a, b] = backtest(time,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0]
-                    
-                    submatriz = Z[:5,:5]
+
+                    submatriz = Z[tolerancia:,tolerancia:]
 
                     print(submatriz.max())
                     indices = np.unravel_index(np.argmax(submatriz),submatriz.shape)
-                    primeiro = indices[0] + 5
-                    segundo = indices[1] + 5
+                    primeiro = indices[0] + tolerancia
+                    segundo = indices[1] + tolerancia
                     print((primeiro,segundo))
-                    maximos.append({"timeframe":time,"maximo":Z.max(),"indices":(primeiro,segundo),"número de trades":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]})
+                    maximos.append({"timeframe":time,"maximo":submatriz.max(),"indices":(primeiro,segundo),"número de trades":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]})
 
                     angulos.clear()
                     Z = np.zeros(X.shape)

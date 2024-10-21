@@ -41,9 +41,7 @@ else:
     eixo_x = list()
     eixo_y = list()
 
-    print(len(datas))
-    print(len(coefs_angular))
-    print(len(coefs_linear))
+    print(angulos)
 
     for a in range(timeframe):
         for i in range(int((len(datas) - timeframe) / 4)):

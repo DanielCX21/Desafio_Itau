@@ -1,7 +1,7 @@
 import json
 import transform_data
 
-nome_arquivo = 'dados_moedas/dados-SOL.json'
+nome_arquivo = 'dados_moedas/dados-BTC.json'
 
 with open(nome_arquivo, 'r') as arquivo:
     dados = json.load(arquivo)

@@ -58,12 +58,12 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
         if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
             #compra long!
             situacao_long, quantidade = compras_long(situacao_long,patrimonio,preco[i + translacao])
-            print(f"LONG:Comprei dia {datas[i + translacao]} por {preco[i + translacao]}")
+            #print(f"LONG:Comprei dia {datas[i + translacao]} por {preco[i + translacao]}")
         if situacao_long and angulo[i] < (90 * param2) and medo[i + translacao] < -medo_inicial:
             #venda long!
             situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
             contador += 1
-            print(f"LONG:Vendi dia {datas[i + translacao]} por {preco[i + translacao]}")
+            #print(f"LONG:Vendi dia {datas[i + translacao]} por {preco[i + translacao]}")
     if situacao_long:
         patrimonio = quantidade * preco[-1]
         contador += 1
@@ -79,21 +79,15 @@ estou_comprado = False
 estou_vendido = False
 patrimonio = 1
 
-escolha_data_inicial = "11/04/2020" #str(input("Digite a data de inicio até 31/01/2018: "))
+escolha_data_inicial = "01/01/2019" #str(input("Digite a data de inicio até 31/01/2018: "))
 
-if transform_data.dh_unix(escolha_data_inicial) < 1517443200:
-    print("Será usada a data limite de 31/01/2018")
-    inicio = 0
-else:
-    inicio = datas.index(escolha_data_inicial)
 
-escolha_data_final = "11/09/2024" #str(input("Digite a data final até 11/09/2024: "))
+inicio = datas.index(escolha_data_inicial)
 
-if transform_data.dh_unix(escolha_data_final) > 1726099200:
-    print("Será usada a data limite de 11/09/2024")
-    fim = len(datas) + 1
-else:
-    fim = datas.index(escolha_data_final) + 1
+escolha_data_final = "01/01/2023" #str(input("Digite a data final até 11/09/2024: "))
+
+
+fim = datas.index(escolha_data_final) + 1
 
 datas = datas[inicio:fim]
 preco = preco[inicio:fim]
@@ -123,4 +117,4 @@ for coef in coefs_angular:
     informacao = float(np.fabs(np.degrees(np.arctan(coef))))
     angulos.append(informacao)
 
-print(backtest(timeframe,estou_comprado,angulos,X[62,70],Y[62,70],medo,1,preco))
+print(backtest(timeframe,estou_comprado,angulos,X[97,30],Y[97,30],medo,1,preco))
