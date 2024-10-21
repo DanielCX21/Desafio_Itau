@@ -169,7 +169,7 @@ if escolha_long_short == 1:
                         #print((X[first,second],Y[first,second]))
                         numero += 1
 
-            print(f"Dias possiveis: {numero}")
+            print(f"Pares de parâmetros possíveis: {numero}")
             angulos.clear()
             Z = np.zeros(X.shape)
             x_interpolar.clear()
