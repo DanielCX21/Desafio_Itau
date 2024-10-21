@@ -158,6 +158,18 @@ if escolha_long_short == 1:
             print(f"Maximo: {submatriz.max()}. Confirmacao: {Z[primeiro,segundo]}. Confirmacao: {backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)}")
             print(f"Numero de trades:{backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]}")
 
+            aceitavel = submatriz.max() * (3 / 4)
+            numero = 0
+
+            for a in range(X.shape[0] - tolerancia):
+                for b in range(X.shape[1] - tolerancia):
+                    if submatriz[a,b] >= aceitavel:
+                        first = a + tolerancia
+                        second = b + tolerancia
+                        #print((X[first,second],Y[first,second]))
+                        numero += 1
+
+            print(f"Dias possiveis: {numero}")
             angulos.clear()
             Z = np.zeros(X.shape)
             x_interpolar.clear()

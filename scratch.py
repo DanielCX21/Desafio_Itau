@@ -1,13 +1,11 @@
-import numpy as np
+import matplotlib.pyplot as plt
 
-Z = np.array([[1,2,6],
-              [3,1,2],
-              [5,4,9]],dtype=float)
+x = (1,2,3)
+y = (2,3,4)
 
-tol = 1
+plt.plot(x,y)
+plt.show()
 
-sub = Z[tol:,tol:]
+a = input(": ")
 
-print(Z)
-
-print(sub)
+print(a)

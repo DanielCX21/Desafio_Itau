@@ -285,7 +285,13 @@ Não vamos fazer operações para o medo neutro.
 Ajustar o parâmetro dos ângulos no backtest e procurar parâmetros sólidos ao longo do tempo.
 Adicionar o parâmetro de quantos trades eu realizo nos testes.
 
-20/10/2024 Manhã:
+20/10/2024:
 
 Adicionado programa visual que mostra as retas com as devidas regressões.
 Não esquecer de pensar como será dividido o portfólio.
+
+Procurar as regiões em que é aceitável fazer os trades dentro do plano (param1,param2).
+De forma a encontrar o melhor parâmetro dentro de todos os intervalos. 
+
+Para os próximos dias, pensar em como aumentar a segurança, encontrar um parâmetro que
+meça risco x retorno das operações e dos parâmetros.
