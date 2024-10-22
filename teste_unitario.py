@@ -5,6 +5,11 @@ import transform_data
 
 medo_inicial = 0
 
+def media(vetor):
+    med = 0
+    for valor in vetor:
+        med += valor
+    return (med / (len(vetor)))
 def compras_long(situacao,patrimonio, preco):
     quantidade = patrimonio / preco
     situacao = True
@@ -54,6 +59,8 @@ def backtest_sl(timeframe,situacao_long, situacao_short, angulo, datas, param1, 
 def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco):
     contador = 0
     translacao = timeframe - 1
+    patrimonios = [1,1]
+    perdas = list()
     for i in range(len(medo) - translacao):
         if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
             #compra long!
@@ -64,11 +71,18 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
             situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
             contador += 1
             print(f"LONG:Vendi dia {datas[i + translacao]} por {preco[i + translacao]}")
+            patrimonios[0] = patrimonios[1]
+            patrimonios[1] = patrimonio
+            if patrimonios[1] < patrimonios[0]:
+                perda_percentual = (patrimonios[0] - patrimonios[1]) / patrimonios[0]
+                perdas.append(perda_percentual)
     if situacao_long:
         patrimonio = quantidade * preco[-1]
         contador += 1
-        print(f"terminei comprado e vendi no ultimo dia por {datas[i + translacao]}")
-    return patrimonio, contador
+        #print(f"terminei comprado e vendi no ultimo dia por {datas[i + translacao]}")
+    risco = media(perdas)
+    perdas.clear() 
+    return patrimonio, contador, risco
 
 preco = dados.preco_close
 medo = dados.medo
@@ -117,4 +131,4 @@ for coef in coefs_angular:
     informacao = float(np.fabs(np.degrees(np.arctan(coef))))
     angulos.append(informacao)
 
-print(backtest(timeframe,estou_comprado,angulos,X[97,30],Y[97,30],medo,1,preco))
+print(backtest(timeframe,estou_comprado,angulos,0.035,0.0315,medo,1,preco))

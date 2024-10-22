@@ -6,8 +6,16 @@ from matplotlib.colors import BoundaryNorm
 from matplotlib import cm
 
 medo_inicial = 0
-tolerancia = 3
+tolerancia = 1
 
+def media(vetor):
+    if len(vetor) == 0:
+        return 0
+    else:
+        med = 0
+        for valor in vetor:
+            med += valor
+        return (med / (len(vetor)))
 def compras_long(situacao,patrimonio, preco):
     quantidade = patrimonio / preco
     situacao = True
@@ -57,6 +65,8 @@ def backtest_sl(timeframe,situacao_long, situacao_short, angulo, datas, param1, 
 def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco):
     contador = 0
     translacao = timeframe - 1
+    patrimonios = [1,1]
+    perdas = list()
     for i in range(len(medo) - translacao):
         if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
             #compra long!
@@ -67,11 +77,18 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
             situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
             contador += 1
             #print(f"LONG:Vendi dia {datas[i + translacao]} por {preco[i + translacao]}")
+            patrimonios[0] = patrimonios[1]
+            patrimonios[1] = patrimonio
+            if patrimonios[1] < patrimonios[0]:
+                perda_percentual = (patrimonios[0] - patrimonios[1]) / patrimonios[0]
+                perdas.append(perda_percentual)
     if situacao_long:
         patrimonio = quantidade * preco[-1]
         contador += 1
         #print(f"terminei comprado e vendi no ultimo dia por {datas[i + translacao]}")
-    return patrimonio, contador
+    risco = media(perdas)
+    perdas.clear() 
+    return patrimonio, contador, risco
 
 preco = dados.preco_close
 medo = dados.medo
@@ -222,7 +239,6 @@ if escolha_long_short == 1:
                     for a in range(X.shape[0]):
                         for b in range(X.shape[1]):
                             Z[a, b] = backtest(time,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0]
-
                     submatriz = Z[tolerancia:,tolerancia:]
 
                     print(submatriz.max())
@@ -230,7 +246,7 @@ if escolha_long_short == 1:
                     primeiro = indices[0] + tolerancia
                     segundo = indices[1] + tolerancia
                     print((primeiro,segundo))
-                    maximos.append({"timeframe":time,"maximo":submatriz.max(),"indices":(primeiro,segundo),"número de trades":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]})
+                    maximos.append({"timeframe":time,"maximo":submatriz.max(),"indices":(primeiro,segundo),"número de trades":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1], "risco":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2]})
 
                     angulos.clear()
                     Z = np.zeros(X.shape)
