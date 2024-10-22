@@ -58,12 +58,12 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
         if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
             #compra long!
             situacao_long, quantidade = compras_long(situacao_long,patrimonio,preco[i + translacao])
-            #print(f"LONG:Comprei dia {datas[i + translacao]} por {preco[i + translacao]}")
+            print(f"LONG:Comprei dia {datas[i + translacao]} por {preco[i + translacao]}")
         if situacao_long and angulo[i] < (90 * param2) and medo[i + translacao] < -medo_inicial:
             #venda long!
             situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
             contador += 1
-            #print(f"LONG:Vendi dia {datas[i + translacao]} por {preco[i + translacao]}")
+            print(f"LONG:Vendi dia {datas[i + translacao]} por {preco[i + translacao]}")
     if situacao_long:
         patrimonio = quantidade * preco[-1]
         contador += 1

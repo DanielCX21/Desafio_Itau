@@ -2,9 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import dados
 import transform_data
+from matplotlib.colors import BoundaryNorm
+from matplotlib import cm
 
 medo_inicial = 0
-tolerancia = 0
+tolerancia = 3
 
 def compras_long(situacao,patrimonio, preco):
     quantidade = patrimonio / preco
@@ -170,6 +172,15 @@ if escolha_long_short == 1:
                         numero += 1
 
             print(f"Pares de parâmetros possíveis: {numero}")
+            Z = Z[:-1,:-1]
+            intervalos = [0,(submatriz.max() / 4) ,aceitavel,Z.max()]
+            colors = ['red','yellow','red']
+            cmap = cm.get_cmap('RdYlBu', len(colors))
+            norm = BoundaryNorm(intervalos, cmap.N)
+            plt.pcolormesh(X, Y, Z, cmap=cmap, norm=norm, shading='flat')
+            plt.colorbar(boundaries=intervalos, ticks=[0,(submatriz.max() / 4) ,aceitavel,Z.max()])
+            plt.show()
+
             angulos.clear()
             Z = np.zeros(X.shape)
             x_interpolar.clear()
