@@ -43,12 +43,14 @@ else:
 
     print(angulos)
 
+    fim = int((len(datas) - (2 * timeframe) + 1) / timeframe)
+
     for a in range(timeframe):
-        for i in range(int((len(datas) - timeframe) / 4)):
+        for i in range(fim):
             for j in range(1,(timeframe + 1)):
-                y = interpolador.reta(coefs_angular[i * 4 + a],coefs_linear[i * 4 + a],j)
+                y = interpolador.reta(coefs_angular[i * timeframe + a],coefs_linear[i * timeframe + a],j)
                 eixo_y.append(y)
-                eixo_x.append(4 * i + j)
+                eixo_x.append(timeframe * i + j)
         plt.plot(eixo_x,eixo_y,color=colors[a])
         eixo_y.clear()
         eixo_x.clear()

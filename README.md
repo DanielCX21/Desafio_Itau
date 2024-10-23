@@ -295,3 +295,72 @@ De forma a encontrar o melhor parâmetro dentro de todos os intervalos.
 
 Para os próximos dias, pensar em como aumentar a segurança, encontrar um parâmetro que
 meça risco x retorno das operações e dos parâmetros.
+
+23/10/2024:
+Inicialmente, pensamos em medir o risco como a média percentual das perdas. Podemos
+fazer também como a média percentual dos ganhos/ média percentual das perdas para cada 
+parâmetro. Temos também um gráfico de cores que indica quais parâmetros são "Aceitáveis".
+A intercessão dos parâmetros mais aceitáveis e com menos risco medidos em todos os timeframes
+serão os melhores parâmetros e um deles será escolhido universalmente para cada moeda.
+
+Podemos também se sobrar tempo escolher os melhores parâmetros para as metas desejadas.
+Porém, em investimentos não devemos levar em conta o tempo para que nosso ativo se valorize,
+mas sim o risco e o retorno envolvidos na operação. Obviamente, se as probabilidades estão a 
+nosso favor a tendência é mais trades => mais lucros e por aí vai...
+
+Um dos fatores interessantes também será o número de trades que o parâmetro executa, pois
+se um parâmetro tem bom riscoxretorno e realiza muitos trades, como explicado acima, a 
+tendência é aumentar o patrimônio.
+
+Agora falando sobre a apresentação temos o seguinte:
+
+*máx 10 páginas(contando com capa e bibliografia).
+*máx 2500 palavras.
+*máx 12 gráficos(saber escolher bem).
+*máx 12 tabelas.
+
+As duas primeiras são obrigatórias e o resto vale o bom senso, mas basta saber escolher bem.
+
+O objetivo do desafio: 
+
+*Criar e apresentar uma estratégia quantitativa de investimentos e convencer o gestor
+de fundo a colocá-la no portfólio, ou considerar a possibilidade de saber mais sobre a 
+proposta.
+
+*Comunicação mais prática e direta.
+
+*Explicar a tese de investimento.
+
+*Explicar a regra de investimento.
+
+*Explicar a origem.
+
+*Explicar de onde saiu.
+
+*Explicar as fontes de dados.
+
+*Mostrar resultados(melhor parte).
+
+*Consistência 
+*risco
+*robustez
+
+*Comentar BACKTEST
+
+*Conclusão
+
+***AVALIAÇÃO***:
+
+1 - Apresentação do robô(5%)
+
+2 - Conceito da estratégia(30%)
+
+3 - Modelagem(15%)
+
+4 - Backtest(20%)
+
+5 - Resultados(20%)
+
+6 - Conclusão(10%)
+
+Temos bons dados para ir adiante.
