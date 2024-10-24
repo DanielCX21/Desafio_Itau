@@ -6,7 +6,7 @@ from matplotlib.colors import BoundaryNorm
 from matplotlib import cm
 
 medo_inicial = 0
-tolerancia = 1
+tolerancia = 3
 
 def media(vetor):
     if len(vetor) == 0:
@@ -67,12 +67,13 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
     translacao = timeframe - 1
     patrimonios = [1,1]
     perdas = list()
+    ganhos = list()
     for i in range(len(medo) - translacao):
         if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
             #compra long!
             situacao_long, quantidade = compras_long(situacao_long,patrimonio,preco[i + translacao])
             #print(f"LONG:Comprei dia {datas[i + translacao]} por {preco[i + translacao]}")
-        if situacao_long and angulo[i] < (90 * param2) and medo[i + translacao] < -medo_inicial:
+        if situacao_long and angulo[i] < (90 * param2) and medo[i + translacao] <  -medo_inicial:
             #venda long!
             situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
             contador += 1
@@ -82,11 +83,17 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
             if patrimonios[1] < patrimonios[0]:
                 perda_percentual = (patrimonios[0] - patrimonios[1]) / patrimonios[0]
                 perdas.append(perda_percentual)
+            if patrimonios[1] > patrimonios[0]:
+                ganho_percentual = (patrimonios[1] - patrimonios[0]) / patrimonios[0]
+                ganhos.append(ganho_percentual)
     if situacao_long:
         patrimonio = quantidade * preco[-1]
         contador += 1
         #print(f"terminei comprado e vendi no ultimo dia por {datas[i + translacao]}")
-    risco = media(perdas)
+    if media(ganhos) == 0 or media(perdas) == 0:
+        risco = False
+    else:
+        risco = media(ganhos) / media(perdas)
     perdas.clear() 
     return patrimonio, contador, risco
 
@@ -176,6 +183,7 @@ if escolha_long_short == 1:
             print(f"Indices: {(primeiro,segundo)}. Parametros: {X[primeiro,segundo],Y[primeiro,segundo]}")
             print(f"Maximo: {submatriz.max()}. Confirmacao: {Z[primeiro,segundo]}. Confirmacao: {backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)}")
             print(f"Numero de trades:{backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]}")
+            print(f"(Retorno x risco) do parametro: {backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2]}")
 
             aceitavel = submatriz.max() * (3 / 4)
             numero = 0
@@ -246,7 +254,7 @@ if escolha_long_short == 1:
                     primeiro = indices[0] + tolerancia
                     segundo = indices[1] + tolerancia
                     print((primeiro,segundo))
-                    maximos.append({"timeframe":time,"maximo":submatriz.max(),"indices":(primeiro,segundo),"número de trades":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1], "risco":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2]})
+                    maximos.append({"timeframe":time,"maximo":submatriz.max(),"indices":(primeiro,segundo),"número de trades":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1], "retorno x risco":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2]})
 
                     angulos.clear()
                     Z = np.zeros(X.shape)
