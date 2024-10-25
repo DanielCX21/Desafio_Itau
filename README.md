@@ -372,3 +372,5 @@ seja feita a melhor escolha.
 
 Além disso, ponderaremos os parâmetros com os fatores: Quantidade de trades, risco e aproveitamento.
 Não sabemos ainda exatamente qual serão os critérios de desempate.
+
+Implementar o algoritmo no scratch dentro de backtest_time
