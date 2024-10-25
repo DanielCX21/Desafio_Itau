@@ -105,19 +105,25 @@ coefs_angular = list()
 estou_comprado = False
 estou_vendido = False
 patrimonio = 1
+nome_moeda = dados.nome_arquivo[19:22]
 
-escolha_data_inicial = str(input("Digite a data de inicio até 31/01/2018: "))
+print(f"ATIVO:{nome_moeda}")
 
-if transform_data.dh_unix(escolha_data_inicial) < 1517443200:
-    print("Será usada a data limite de 31/01/2018")
+data_inicio = transform_data.unix_dh(dados.data_inicio)[:-9]
+data_final = transform_data.unix_dh(dados.data_final)[:-9]
+
+escolha_data_inicial = str(input(f"Digite a data de inicio até {data_inicio}: "))
+
+if transform_data.dh_unix(escolha_data_inicial) < dados.data_inicio:
+    print(f"Será usada a data limite de {data_inicio}")
     inicio = 0
 else:
     inicio = datas.index(escolha_data_inicial)
 
-escolha_data_final = str(input("Digite a data final até 11/09/2024: "))
+escolha_data_final = str(input(f"Digite a data final até {data_final}: "))
 
-if transform_data.dh_unix(escolha_data_final) > 1726099200:
-    print("Será usada a data limite de 11/09/2024")
+if transform_data.dh_unix(escolha_data_final) > dados.data_final:
+    print(f"Será usada a data limite de {data_final}")
     fim = len(datas) + 1
 else:
     fim = datas.index(escolha_data_final) + 1

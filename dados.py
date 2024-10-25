@@ -1,7 +1,7 @@
 import json
 import transform_data
 
-nome_arquivo = 'dados_moedas/dados-ETH.json'
+nome_arquivo = 'dados_moedas/dados-BTC.json'
 
 with open(nome_arquivo, 'r') as arquivo:
     dados = json.load(arquivo)
@@ -15,6 +15,9 @@ preco_close = list()
 preco_high = list()
 preco_low = list()
 data = list()
+
+data_inicio = lista_dados[0]['time']
+data_final = lista_dados[-1]['time']
 
 for valor in lista_dados:
     medo.append(valor['fear_greed_value'] - 50)
