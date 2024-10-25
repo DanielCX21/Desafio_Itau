@@ -364,3 +364,11 @@ proposta.
 6 - Conclusão(10%)
 
 Temos bons dados para ir adiante.
+
+25/10/2024:
+
+Por agora, falta criar um programa que pegue a intercessão dos melhores parâmetros para que
+seja feita a melhor escolha.
+
+Além disso, ponderaremos os parâmetros com os fatores: Quantidade de trades, risco e aproveitamento.
+Não sabemos ainda exatamente qual serão os critérios de desempate.

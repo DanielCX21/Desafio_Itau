@@ -217,6 +217,9 @@ if escolha_long_short == 1:
             x_interpolar.clear()
 
     else:
+
+        multiplicidade = preco[-1] / preco[0]
+
         if escolha_timeframes_unico == 2:
             
             parametro = int(input("Qual sera o timeframe limite:")) 
@@ -227,6 +230,7 @@ if escolha_long_short == 1:
             else:
                 
                 maximos = list()
+                maximos_second = list()
                 eixo_y = list()
 
                 for time in range(3,parametro + 1):
@@ -255,12 +259,24 @@ if escolha_long_short == 1:
                             Z[a, b] = backtest(time,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0]
                     submatriz = Z[tolerancia:,tolerancia:]
 
+                    aceitavel = submatriz.max() * (3 / 4)
+                    numero = 0
+
+                    for a in range(X.shape[0] - tolerancia):
+                        for b in range(X.shape[1] - tolerancia):
+                            if submatriz[a,b] >= aceitavel:
+                                #first = a + tolerancia
+                                #second = b + tolerancia
+                                #print((X[first,second],Y[first,second]))
+                                numero += 1
+
                     print(submatriz.max())
                     indices = np.unravel_index(np.argmax(submatriz),submatriz.shape)
                     primeiro = indices[0] + tolerancia
                     segundo = indices[1] + tolerancia
-                    print((primeiro,segundo))
-                    maximos.append({"timeframe":time,"maximo":submatriz.max(),"indices":(primeiro,segundo),"número de trades":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1], "retorno x risco":backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2]})
+                    print((int(primeiro),int(segundo)))
+                    maximos.append({"timeframe":time,"maximo":float(submatriz.max()),"indices":(int(primeiro),int(segundo)),"número de trades":int(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]), "retorno x risco":float(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2])})
+                    maximos_second.append({"Pares possíveis":int(numero), "Aproveitamento": float(submatriz.max()/multiplicidade)})
 
                     angulos.clear()
                     Z = np.zeros(X.shape)
@@ -270,8 +286,10 @@ if escolha_long_short == 1:
 
                 eixo_x = list(range(3,parametro + 1))
 
-                for max in maximos:
-                    print(max)
+                for i in range(len(maximos)):
+                    print(maximos[i])
+                    print(maximos_second[i])
+                    print("")
 
                 for maximo in maximos:
                     eixo_y.append(maximo['maximo'])
