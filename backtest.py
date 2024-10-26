@@ -148,8 +148,8 @@ if escolha_long_short == 1:
             pass
         else:
             x_interpolar = list(range(1,(parametro + 1)))
-            x = np.linspace(0,1,200)
-            y = np.linspace(0,1,200)
+            x = np.linspace(0,1,100)
+            y = np.linspace(0,1,100)
             X,Y = np.meshgrid(x,y)
             Z = np.zeros(X.shape)
 
@@ -191,7 +191,7 @@ if escolha_long_short == 1:
             print(f"Numero de trades:{backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]}")
             print(f"(Retorno x risco) do parametro: {backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2]}")
 
-            aceitavel = submatriz.max() * (3 / 4)
+            aceitavel = submatriz.max() * (3 / 5)
             numero = 0
 
             for a in range(X.shape[0] - tolerancia):

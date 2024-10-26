@@ -374,3 +374,9 @@ Além disso, ponderaremos os parâmetros com os fatores: Quantidade de trades, r
 Não sabemos ainda exatamente qual serão os critérios de desempate.
 
 Implementar o algoritmo no scratch dentro de backtest_time
+
+26/10/2024:
+
+Verificando a margem aceitável para algumas datas que não nescessariamente são as que serão usadas
+chegamos em 0,645 como o mais aceitável por enquanto. Testar no teste_unitário os parâmetros retornados
+e ver qual que se adapta melhor nos testes de risco...

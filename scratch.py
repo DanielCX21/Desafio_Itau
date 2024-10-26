@@ -10,4 +10,3 @@ tuplas_comuns = set(listas[0]).intersection(*map(set, listas[1:]))
 # Resultado como uma lista (opcional)
 tuplas_comuns = list(tuplas_comuns)
 print(tuplas_comuns)
-
