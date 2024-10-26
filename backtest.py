@@ -236,8 +236,8 @@ if escolha_long_short == 1:
                 for time in range(3,parametro + 1):
 
                     x_interpolar = list(range(1,(time + 1)))
-                    x = np.linspace(0,1,200)
-                    y = np.linspace(0,1,200)
+                    x = np.linspace(0,1,100)
+                    y = np.linspace(0,1,100)
                     X,Y = np.meshgrid(x,y)
                     Z = np.zeros(X.shape)
 

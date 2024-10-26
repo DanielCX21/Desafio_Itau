@@ -380,3 +380,16 @@ Implementar o algoritmo no scratch dentro de backtest_time
 Verificando a margem aceitável para algumas datas que não nescessariamente são as que serão usadas
 chegamos em 0,645 como o mais aceitável por enquanto. Testar no teste_unitário os parâmetros retornados
 e ver qual que se adapta melhor nos testes de risco...
+
+Basta definir os períodos com base nos dados, testar a aceitação e escolher os melhores.
+
+Começar com a ideia(Problema a ser resolvido) -> Solução
+Explicação Fundamentalista
+
+Robô
+
+Modelagem
+
+Backtest
+
+Conclusão

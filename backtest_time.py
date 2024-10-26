@@ -2,6 +2,7 @@ import dados
 import numpy as np
 from matplotlib.colors import BoundaryNorm
 from matplotlib import cm
+import matplotlib.pyplot as plt
 
 tolerancia = 1
 parametro = 9
@@ -148,7 +149,10 @@ for i in range(len(data_inicial)):
     primeiro = indices[0] + tolerancia
     segundo = indices[1] + tolerancia
 
-    aceitavel = submatriz.max() * (0.645)
+    aceitavel = submatriz.max() * (0.65)
+    #BTC - 0,65
+    #ETH - 0,68
+    #SOL - 0,8
     numero = 0
 
     for a in range(X.shape[0] - tolerancia):
@@ -168,3 +172,11 @@ for i in range(len(data_inicial)):
 tuplas_comuns = set(possiveis_possiveis[0]).intersection(*map(set, possiveis_possiveis[1:]))
 tuplas_comuns = list(tuplas_comuns)
 print(tuplas_comuns)
+
+x, y = zip(*tuplas_comuns)
+
+plt.scatter(x, y)
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Gráfico de Dispersão dos Pontos")
+plt.show()
