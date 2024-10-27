@@ -96,7 +96,6 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
         risco = media(ganhos) / media(perdas)
     perdas.clear() 
     return patrimonio, contador, risco
-
 def escolhedor(maximos):
     #lista de dicionarios!
     tamanho = len(maximos)
