@@ -111,9 +111,9 @@ possiveis = list()
 
 
 for i in range(len(data_inicial)):
-    preco = dados.preco_close
-    medo = dados.medo
-    datas = dados.data
+    preco = dados.preco_close.copy()
+    medo = dados.medo.copy()
+    datas = dados.data.copy()
     inicio = datas.index(data_inicial[i])
     fim = datas.index(data_final[i]) + 1
     datas = datas[inicio:fim]
@@ -162,12 +162,15 @@ for i in range(len(data_inicial)):
                 second = b + tolerancia
                 #print((X[first,second],Y[first,second]))
                 #numero += 1
-                possiveis.append((X[first,second],Y[first,second]))
+                possiveis.append((float(X[first,second]),float(Y[first,second])))
     possiveis_possiveis.append(possiveis.copy())
     possiveis.clear()
     angulos.clear()
     Z = np.zeros(X.shape)
     x_interpolar.clear()
+    preco.clear()
+    datas.clear()
+    medo.clear()
 
 tuplas_comuns = set(possiveis_possiveis[0]).intersection(*map(set, possiveis_possiveis[1:]))
 tuplas_comuns = list(tuplas_comuns)
@@ -180,3 +183,10 @@ plt.xlabel("X")
 plt.ylabel("Y")
 plt.title("Gráfico de Dispersão dos Pontos")
 plt.show()
+
+def norma(tupla):
+    return np.linalg.norm(tupla)
+
+tupla_menor_norma = min(tuplas_comuns, key=norma)
+
+print(tupla_menor_norma)

@@ -97,6 +97,31 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
     perdas.clear() 
     return patrimonio, contador, risco
 
+def escolhedor(maximos):
+    #lista de dicionarios!
+    tamanho = len(maximos)
+    media_trades = 0
+    media_patrimonio = 0
+    media_risco = 0
+    media_possibilidades = 0
+    for item in maximos:
+        media_patrimonio += item['maximo']
+        media_possibilidades += item['Pares possíveis']
+        media_trades += item['número de trades']
+        media_risco += item['retorno x risco']
+    media_patrimonio /= tamanho
+    media_risco /= tamanho
+    media_possibilidades /= tamanho
+    media_trades /= tamanho
+    apoio = list()
+    for item in maximos:
+        produto = (item['maximo'] - media_patrimonio) * (item['Pares possíveis'] - media_possibilidades) * (item['número de trades'] - media_trades) * (item['retorno x risco'] - media_risco)
+        produto = np.fabs(produto)
+        apoio.append(produto)
+    maximo = max(apoio)
+    indices = apoio.index(maximo)
+    return indices
+
 preco = dados.preco_close
 medo = dados.medo
 datas = dados.data
@@ -191,7 +216,7 @@ if escolha_long_short == 1:
             print(f"Numero de trades:{backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]}")
             print(f"(Retorno x risco) do parametro: {backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2]}")
 
-            aceitavel = submatriz.max() * (3 / 5)
+            aceitavel = submatriz.max() * (0.65)
             numero = 0
 
             for a in range(X.shape[0] - tolerancia):
@@ -275,8 +300,8 @@ if escolha_long_short == 1:
                     primeiro = indices[0] + tolerancia
                     segundo = indices[1] + tolerancia
                     print((int(primeiro),int(segundo)))
-                    maximos.append({"timeframe":time,"maximo":float(submatriz.max()),"indices":(int(primeiro),int(segundo)),"número de trades":int(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]), "retorno x risco":float(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2])})
-                    maximos_second.append({"Pares possíveis":int(numero), "Aproveitamento": float(submatriz.max()/multiplicidade)})
+                    maximos.append({"timeframe":time,"maximo":float(submatriz.max()),"Pares possíveis":int(numero),"indices":(int(primeiro),int(segundo)),"número de trades":int(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]), "retorno x risco":float(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2])})
+                    maximos_second.append({"indices":(int(primeiro),int(segundo)),"Aproveitamento": float(submatriz.max()/multiplicidade)})
 
                     angulos.clear()
                     Z = np.zeros(X.shape)
@@ -298,6 +323,8 @@ if escolha_long_short == 1:
                 plt.show()
 
                 eixo_x.clear()
+
+                print(f"Um possível melhor timeframe é: {escolhedor(maximos) + 3}")
 
         else:
             pass

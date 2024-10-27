@@ -109,7 +109,7 @@ medo = medo[inicio:fim]
 
 a = 62
 b = 70
-timeframe = 3
+timeframe = 9
 x = np.linspace(0,1,100)
 
 x_interpolar = list(range(1,(timeframe + 1)))
