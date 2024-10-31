@@ -393,3 +393,7 @@ Modelagem
 Backtest
 
 Conclusão
+
+31/10/2024:
+
+Arrumar os dados de ADA, ETH, BNB

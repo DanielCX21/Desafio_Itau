@@ -10,17 +10,6 @@
         "TimeTo": 1730332800,
         "Data": [
             {
-                "time": 1438819200,
-                "high": 0,
-                "low": 0,
-                "open": 0,
-                "volumefrom": 0,
-                "volumeto": 0,
-                "close": 0,
-                "conversionType": "direct",
-                "conversionSymbol": ""
-            },
-            {
                 "time": 1438905600,
                 "high": 27.79,
                 "low": 0.7809,
