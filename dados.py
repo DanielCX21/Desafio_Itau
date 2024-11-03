@@ -1,10 +1,19 @@
 import json
 import transform_data
 
-nome_arquivo = 'dados_moedas/dados-BTC.json'
+nome_arquivo = 'dados_moedas/dados-ETH.json'
 
-with open(nome_arquivo, 'r') as arquivo:
-    dados = json.load(arquivo)
+nome_arquivo_apoio = 'dados_moedas/dados-BTC.json'
+
+if nome_arquivo == 'dados_moedas/dados-BTC.json':
+    with open(nome_arquivo, 'r') as arquivo:
+        dados = json.load(arquivo)
+else:
+    with open(nome_arquivo, 'r') as arquivo:
+        dados = json.load(arquivo)
+    with open(nome_arquivo_apoio, 'r') as arquivo_apoio:
+        dados_apoio = json.load(arquivo_apoio)
+        lista_dados_apoio = dados_apoio['Data']['Data']
 
 lista_dados = dados['Data']['Data']
 medo = list()
@@ -19,8 +28,12 @@ data = list()
 data_inicio = lista_dados[0]['time']
 data_final = lista_dados[-1]['time']
 
-for valor in lista_dados:
-    medo.append(valor['fear_greed_value'] - 50)
+
+for i, valor in enumerate(lista_dados):
+    if "fear_greed_value" in valor:
+        medo.append(valor["fear_greed_value"] - 50)
+    else:
+        medo.append(lista_dados_apoio[i]["fear_greed_value"] - 50)
 
 for valor in lista_dados:
     volume_to.append(valor['volumeto'])

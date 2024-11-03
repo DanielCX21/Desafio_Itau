@@ -393,3 +393,25 @@ Modelagem
 Backtest
 
 Conclusão
+
+03/11/2024
+
+Fase de conclusão - Para essa semana encontrar os melhores ângulos para as 5 moedas.
+
+Períodos:
+
+1) Todo período possível.
+
+2) 4 Anos a partir do ano de halving até o ano pré halving seguinte - fim de 2019 até fim de 2023
+
+3) 1 Ano de cada vez - Terá menor peso na decisão.
+
+4) Caso não de os 4 anos testar somente todo o período possível.
+
+Ou seja, 5 ou 6 medidas.
+5 para SOL e 6 para o resto.
+
+Dados todos corrigidos e agora estão sincronizados desde 01/02/2018 -> 11/09/2024
+
+Nem todas as moedas tinham o fear_greed_value até o período inicial, então em dados é feita essa checagem 
+e aonde não tem é inserido o do BTC que está completo até 01/02/2018.
