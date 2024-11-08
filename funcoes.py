@@ -18,17 +18,14 @@ def vendas_long(situacao,quantidade, preco):
     situacao = False
     tupla = (situacao,patrimonio_final)
     return tupla
-def venda_short(situacao, patrimonio,preco):
     quantidade = patrimonio / preco
     situacao = True
     tupla = (situacao, quantidade)
     return tupla
-def compra_short(situacao,quantidade,preco, patrimonio):
     patrimonio_final = (2 * patrimonio) - quantidade * preco
     situacao = False
     tupla = (situacao,patrimonio_final)
     return tupla
-def backtest_sl(timeframe,situacao_long, situacao_short, angulo, datas, param1, param2, medo, patrimonio,preco):
     translacao = timeframe - 1
     for i in range(len(medo)):
         if not situacao_long and not situacao_short and angulo[i] < (90 * param1) and medo[i + translacao] <= 0:
@@ -57,6 +54,8 @@ def backtest_sl(timeframe,situacao_long, situacao_short, angulo, datas, param1, 
 def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco):
     medo_inicial = 0
     contador = 0
+    ganhei = 0
+    perdi = 0
     translacao = timeframe - 1
     patrimonios = [1,1]
     perdas = list()
@@ -76,9 +75,11 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
             if patrimonios[1] < patrimonios[0]:
                 perda_percentual = (patrimonios[0] - patrimonios[1]) / patrimonios[0]
                 perdas.append(perda_percentual)
+                ganhei += 1
             if patrimonios[1] > patrimonios[0]:
                 ganho_percentual = (patrimonios[1] - patrimonios[0]) / patrimonios[0]
                 ganhos.append(ganho_percentual)
+                perdi += 1
     if situacao_long:
         patrimonio = quantidade * preco[-1]
         contador += 1
@@ -87,10 +88,10 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
         risco = False
     else:
         risco = media(ganhos) / media(perdas)
-    perdas.clear() 
-    return patrimonio, contador, risco
+    perdas.clear()
+    vitorias = ganhei
+    return patrimonio, contador, risco, vitorias
 def escolhedor(maximos):
-    #lista de dicionarios!
     tamanho = len(maximos)
     media_trades = 0
     media_patrimonio = 0
@@ -107,7 +108,7 @@ def escolhedor(maximos):
     media_trades /= tamanho
     apoio = list()
     for item in maximos:
-        produto = (item['maximo'] - media_patrimonio) * (item['Pares possíveis'] - media_possibilidades) * (item['número de trades'] - media_trades) * (item['número de trades'] - media_trades) * (item['retorno x risco'] - media_risco)
+        produto = (item['Pares possíveis'] - media_possibilidades) * (item['número de trades'] - media_trades) * (item['número de trades'] - media_trades) * (item['retorno x risco'] - media_risco)
         produto = np.fabs(produto)
         apoio.append(produto)
     maximo = max(apoio)

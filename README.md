@@ -441,3 +441,9 @@ Dados todos corrigidos e agora estão sincronizados desde 01/02/2018 -> 11/09/20
 
 Nem todas as moedas tinham o fear_greed_value até o período inicial, então em dados é feita essa checagem 
 e aonde não tem é inserido o do BTC que está completo até 01/02/2018.
+
+08/11/2024
+
+Agora basta escolher o parâmetro certo para esses TIMEFRAMES
+utilizar o teste_unitario para pegar os resultados.
+Todos os programas já estão perfeitos, basta os resultados.

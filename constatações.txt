@@ -3,3 +3,7 @@
 BTC: 9
 SOL: 6
 ETH: 6
+ADA: 4
+BNB: 12
+
+

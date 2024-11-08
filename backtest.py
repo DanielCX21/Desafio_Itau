@@ -106,9 +106,9 @@ if escolha_long_short == 1:
             submatriz = Z[tolerancia:,tolerancia:]
 
             indices = np.unravel_index(np.argmax(submatriz),submatriz.shape)
-            primeiro = indices[0] + tolerancia
-            segundo = indices[1] + tolerancia
-            print(f"Indices: {(primeiro,segundo)}. Parametros: {X[primeiro,segundo],Y[primeiro,segundo]}")
+            primeiro = int(indices[0]) + tolerancia
+            segundo = int(indices[1]) + tolerancia
+            print(f"Indices: {(primeiro,segundo)}. Parametros: {float(X[primeiro,segundo]),float(Y[primeiro,segundo])}")
             print(f"Maximo: {submatriz.max()}. Confirmacao: {Z[primeiro,segundo]}. Confirmacao: {backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)}")
             print(f"Numero de trades:{backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]}")
             print(f"(Retorno x risco) do parametro: {backtest(parametro,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2]}")
@@ -198,7 +198,7 @@ if escolha_long_short == 1:
                     segundo = indices[1] + tolerancia
                     print((int(primeiro),int(segundo)))
                     maximos.append({"timeframe":time,"maximo":float(submatriz.max()),"Pares possíveis":int(numero),"número de trades":int(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]), "retorno x risco":float(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2])})
-                    maximos_second.append({"indices":(int(primeiro),int(segundo)),"Aproveitamento": float(submatriz.max()/multiplicidade)})
+                    maximos_second.append({"indices":(int(primeiro),int(segundo)),"Aproveitamento": float(submatriz.max()/multiplicidade), "Trades certos" : int(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[3])})
 
                     angulos.clear()
                     Z = np.zeros(X.shape)
@@ -208,9 +208,9 @@ if escolha_long_short == 1:
 
                 eixo_x = list(range(3,parametro + 1))
 
-                for i in range(len(maximos)):
-                    print(maximos[i])
-                    print(maximos_second[i])
+                for m in range(len(maximos)):
+                    print(maximos[m])
+                    print(maximos_second[m])
                     print("")
 
                 for maximo in maximos:
@@ -218,7 +218,7 @@ if escolha_long_short == 1:
 
                 plt.plot(eixo_x,eixo_y)
                 plt.show()
-
+                eixo_y.clear()
                 eixo_x.clear()
 
                 print(f"Um possível melhor timeframe é: {escolhedor(maximos) + 3}")

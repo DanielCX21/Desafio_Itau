@@ -13,12 +13,12 @@ estou_comprado = False
 estou_vendido = False
 patrimonio = 1
 
-escolha_data_inicial = "01/01/2019" #str(input("Digite a data de inicio até 31/01/2018: "))
+escolha_data_inicial = "31/01/2018" #str(input("Digite a data de inicio até 31/01/2018: "))
 
 
 inicio = datas.index(escolha_data_inicial)
 
-escolha_data_final = "01/01/2023" #str(input("Digite a data final até 11/09/2024: "))
+escolha_data_final = "11/09/2024" #str(input("Digite a data final até 11/09/2024: "))
 
 
 fim = datas.index(escolha_data_final) + 1
@@ -27,8 +27,8 @@ datas = datas[inicio:fim]
 preco = preco[inicio:fim]
 medo = medo[inicio:fim]
 
-a = 62
-b = 70
+a = 76
+b = 62
 timeframe = 9
 x = np.linspace(0,1,100)
 
@@ -51,4 +51,4 @@ for coef in coefs_angular:
     informacao = float(np.fabs(np.degrees(np.arctan(coef))))
     angulos.append(informacao)
 
-print(backtest(timeframe,estou_comprado,angulos,0.035,0.0315,medo,1,preco))
+print(backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco))
