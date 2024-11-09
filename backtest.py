@@ -7,7 +7,6 @@ from matplotlib import cm
 from funcoes import backtest, escolhedor
 
 tolerancia = 3
-
 preco = dados.preco_close
 medo = dados.medo
 datas = dados.data
