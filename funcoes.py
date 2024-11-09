@@ -83,6 +83,16 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
     if situacao_long:
         patrimonio = quantidade * preco[-1]
         contador += 1
+        patrimonios[0] = patrimonios[1]
+        patrimonios[1] = patrimonio
+        if patrimonios[1] < patrimonios[0]:
+            perda_percentual = (patrimonios[0] - patrimonios[1]) / patrimonios[0]
+            perdas.append(perda_percentual)
+            ganhei += 1
+        if patrimonios[1] > patrimonios[0]:
+            ganho_percentual = (patrimonios[1] - patrimonios[0]) / patrimonios[0]
+            ganhos.append(ganho_percentual)
+            perdi += 1
         #print(f"terminei comprado e vendi no ultimo dia por {datas[i + translacao]}")
     if media(ganhos) == 0 or media(perdas) == 0:
         risco = False

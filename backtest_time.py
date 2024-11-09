@@ -20,7 +20,6 @@ angulos = list()
 possiveis_possiveis = list()
 possiveis = list()
 
-
 for i in range(len(data_inicial)):
     preco = dados.preco_close.copy()
     medo = dados.medo.copy()

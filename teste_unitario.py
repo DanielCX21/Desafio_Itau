@@ -13,13 +13,11 @@ estou_comprado = False
 estou_vendido = False
 patrimonio = 1
 
-escolha_data_inicial = "31/01/2018" #str(input("Digite a data de inicio até 31/01/2018: "))
-
+escolha_data_inicial = "31/12/2019" #str(input("Digite a data de inicio até 31/01/2018: "))
 
 inicio = datas.index(escolha_data_inicial)
 
-escolha_data_final = "11/09/2024" #str(input("Digite a data final até 11/09/2024: "))
-
+escolha_data_final = "31/12/2023" #str(input("Digite a data final até 11/09/2024: "))
 
 fim = datas.index(escolha_data_final) + 1
 
@@ -51,4 +49,8 @@ for coef in coefs_angular:
     informacao = float(np.fabs(np.degrees(np.arctan(coef))))
     angulos.append(informacao)
 
-print(backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco))
+print(f"Patrimonio:{backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0]}")
+print(f"Aproveitamento: {backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0] / (preco[-1]/preco[0])}")
+print(f"Numero de trades{backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[1]}")
+print(f"Vitorias:{backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[3]}")
+print(f"Risco: {backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[2]}")
