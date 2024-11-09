@@ -4,11 +4,11 @@ from matplotlib.colors import BoundaryNorm
 import matplotlib.pyplot as plt
 from funcoes import backtest
 
-tolerancia = 4
+tolerancia = 2
 parametro = 9
 
-data_inicial = ["31/01/2018", "31/12/2019", "01/01/2019"]
-data_final = ["31/12/2023", "31/12/2023", "01/01/2023"]
+data_inicial = ["31/01/2018", "31/12/2019"]
+data_final = ["31/12/2023", "31/12/2023"]
 
 y_interpolar = list()
 coefs_angular = list()
@@ -28,6 +28,7 @@ for i in range(len(data_inicial)):
     datas = datas[inicio:fim]
     preco = preco[inicio:fim]
     medo = medo[inicio:fim]
+    comparacao = preco[-1] / preco[0]
 
     x_interpolar = list(range(1,(parametro + 1)))
     x = np.linspace(0,1,100)
@@ -45,8 +46,6 @@ for i in range(len(data_inicial)):
     for coef in coefs_angular:
         informacao = float(np.fabs(np.degrees(np.arctan(coef))))
         angulos.append(informacao)
-    #print(len(angulos))
-    #print(len(datas))
 
     for a in range(X.shape[0]):
         for b in range(X.shape[1]):
@@ -54,19 +53,16 @@ for i in range(len(data_inicial)):
     
     submatriz = Z[tolerancia:,tolerancia:]
 
-    aceitavel = submatriz.max() * (0.6)
+    aceitavel = comparacao
     #BTC - 0,65
     #ETH - 0,68
     #SOL - 0,8
-    numero = 0
 
     for a in range(X.shape[0] - tolerancia):
         for b in range(X.shape[1] - tolerancia):
             if submatriz[a,b] >= aceitavel:
                 first = a + tolerancia
                 second = b + tolerancia
-                #print((X[first,second],Y[first,second]))
-                #numero += 1
                 possiveis.append((first,second))
     possiveis_possiveis.append(possiveis.copy())
     possiveis.clear()
@@ -90,3 +86,4 @@ plt.xlabel("X")
 plt.ylabel("Y")
 plt.title("Gráfico de Dispersão dos Pontos")
 plt.show()
+

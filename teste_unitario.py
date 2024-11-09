@@ -17,7 +17,7 @@ escolha_data_inicial = "31/12/2019" #str(input("Digite a data de inicio até 31/
 
 inicio = datas.index(escolha_data_inicial)
 
-escolha_data_final = "31/12/2020" #str(input("Digite a data final até 11/09/2024: "))
+escolha_data_final = "31/12/2023" #str(input("Digite a data final até 11/09/2024: "))
 
 fim = datas.index(escolha_data_final) + 1
 
@@ -25,8 +25,8 @@ datas = datas[inicio:fim]
 preco = preco[inicio:fim]
 medo = medo[inicio:fim]
 
-a = 54
-b = 16
+a = 21
+b = 9
 timeframe = 9
 x = np.linspace(0,1,100)
 
@@ -50,7 +50,7 @@ for coef in coefs_angular:
     angulos.append(informacao)
 
 print(f"Patrimonio: {backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0]}")
-print(f"Aproveitamento: {backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0] / (preco[-1]/preco[0])}")
 print(f"Numero de trades: {backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[1]}")
 print(f"Vitorias: {backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[3]}")
-print(f"Risco: {backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[2]}")
+print(f"Aproveitamento: {backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0] / (preco[-1]/preco[0])}")
+#print(f"Risco: {backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[2]}")
