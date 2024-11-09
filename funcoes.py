@@ -18,39 +18,6 @@ def vendas_long(situacao,quantidade, preco):
     situacao = False
     tupla = (situacao,patrimonio_final)
     return tupla
-    quantidade = patrimonio / preco
-    situacao = True
-    tupla = (situacao, quantidade)
-    return tupla
-    patrimonio_final = (2 * patrimonio) - quantidade * preco
-    situacao = False
-    tupla = (situacao,patrimonio_final)
-    return tupla
-    translacao = timeframe - 1
-    for i in range(len(medo)):
-        if not situacao_long and not situacao_short and angulo[i] < (90 * param1) and medo[i + translacao] <= 0:
-            #compra long!
-            situacao_long, quantidade = compras_long(situacao_long,patrimonio,preco[i + translacao])
-            #print(f"LONG:Comprei dia {datas[i + translacao]} por {preco[i + translacao]}")
-        if situacao_long and not situacao_short and angulo[i] < (90 * param2) and medo[i + translacao] > 0:
-            #venda long!
-            situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
-            #print(f"LONG:Vendi dia {datas[i + translacao]} por {preco[i + translacao]}")
-        if not situacao_long and not situacao_short and angulo[i] < (90 * param2) and medo[i + translacao] > 0:
-            #venda short!
-            situacao_short, quantidade = venda_short(situacao_short,patrimonio,preco[i + translacao]) 
-            #print(f"SHORT:Vendi dia {datas[i + translacao]} por {preco[i + translacao]}")
-        if not situacao_long and situacao_short and angulo[i] < (90 * param1) and medo[i + translacao] < 0:
-            #compra short!
-            situacao_short, patrimonio = compra_short(situacao_short,quantidade,preco[i + translacao],patrimonio)
-            #print(f"SHORT:Comprei dia {datas[i + translacao]} por {preco[i + translacao]}")
-    if situacao_long:
-        patrimonio = quantidade * preco[-1]
-        #print(f"terminei comprado e vendi no ultimo dia por {datas[i + translacao]}")
-    if situacao_short:
-        patrimonio = (2 * patrimonio) - quantidade * preco[-1]
-        #print(f"terminei vendido e vendi no último dia por {datas[i + translacao]}")
-    return patrimonio
 def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco):
     medo_inicial = 0
     contador = 0
@@ -94,6 +61,56 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
             ganhos.append(ganho_percentual)
             perdi += 1
         #print(f"terminei comprado e vendi no ultimo dia por {preco[-1]}")
+    if media(ganhos) == 0 or media(perdas) == 0:
+        risco = False
+    else:
+        risco = media(ganhos) / media(perdas)
+    perdas.clear()
+    vitorias = ganhei
+    return patrimonio, contador, risco, vitorias
+def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco, data):
+    medo_inicial = 0
+    contador = 0
+    ganhei = 0
+    perdi = 0
+    translacao = timeframe - 1
+    patrimonios = [1,1]
+    perdas = list()
+    ganhos = list()
+    for i in range(len(medo) - translacao):
+        if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
+            #compra long!
+            situacao_long, quantidade = compras_long(situacao_long,patrimonio,preco[i + translacao])
+            print(f"LONG:Comprei por {preco[i + translacao]} no dia {data[i + translacao]}")
+        if situacao_long and angulo[i] < (90 * param2) and medo[i + translacao] <  -medo_inicial:
+            #venda long!
+            situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
+            contador += 1
+            print(f"LONG:Vendi por {preco[i + translacao]} no dia {data[i + translacao]}")
+            patrimonios[0] = patrimonios[1]
+            patrimonios[1] = patrimonio
+            if patrimonios[1] < patrimonios[0]:
+                perda_percentual = (patrimonios[0] - patrimonios[1]) / patrimonios[0]
+                perdas.append(perda_percentual)
+                ganhei += 1
+            if patrimonios[1] > patrimonios[0]:
+                ganho_percentual = (patrimonios[1] - patrimonios[0]) / patrimonios[0]
+                ganhos.append(ganho_percentual)
+                perdi += 1
+    if situacao_long:
+        patrimonio = quantidade * preco[-1]
+        contador += 1
+        patrimonios[0] = patrimonios[1]
+        patrimonios[1] = patrimonio
+        if patrimonios[1] < patrimonios[0]:
+            perda_percentual = (patrimonios[0] - patrimonios[1]) / patrimonios[0]
+            perdas.append(perda_percentual)
+            ganhei += 1
+        if patrimonios[1] > patrimonios[0]:
+            ganho_percentual = (patrimonios[1] - patrimonios[0]) / patrimonios[0]
+            ganhos.append(ganho_percentual)
+            perdi += 1
+        print(f"terminei comprado e vendi no ultimo dia por {preco[-1]} no dia {data[i + translacao]}")
     if media(ganhos) == 0 or media(perdas) == 0:
         risco = False
     else:

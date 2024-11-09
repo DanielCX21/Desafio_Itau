@@ -1,7 +1,7 @@
 **TIMEFRAMES**
 
-BTC: 9
-SOL: 8
-ETH: 6
-
-A tolerancia será 4.
+BTC: 9 (76,62)
+SOL: 6 (86,75)
+ETH: 9 (76,62)
+ADA: 4 (90,30)
+BNB: FODASE!
