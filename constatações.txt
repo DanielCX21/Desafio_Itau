@@ -1,9 +1,7 @@
 **TIMEFRAMES**
 
 BTC: 9
-SOL: 6
+SOL: 8
 ETH: 6
-ADA: 4
-BNB: 12
 
 A tolerancia será 4.

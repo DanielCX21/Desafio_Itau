@@ -13,7 +13,7 @@ estou_comprado = False
 estou_vendido = False
 patrimonio = 1
 
-escolha_data_inicial = "31/12/2019" #str(input("Digite a data de inicio até 31/01/2018: "))
+escolha_data_inicial = "31/01/2018" #str(input("Digite a data de inicio até 31/01/2018: "))
 
 inicio = datas.index(escolha_data_inicial)
 
@@ -25,8 +25,8 @@ datas = datas[inicio:fim]
 preco = preco[inicio:fim]
 medo = medo[inicio:fim]
 
-a = 21
-b = 9
+a = 3
+b = 15
 timeframe = 9
 x = np.linspace(0,1,100)
 

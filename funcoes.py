@@ -64,12 +64,12 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
         if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
             #compra long!
             situacao_long, quantidade = compras_long(situacao_long,patrimonio,preco[i + translacao])
-            #print(f"LONG:Comprei dia {datas[i + translacao]} por {preco[i + translacao]}")
+            #print(f"LONG:Comprei por {preco[i + translacao]}")
         if situacao_long and angulo[i] < (90 * param2) and medo[i + translacao] <  -medo_inicial:
             #venda long!
             situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
             contador += 1
-            #print(f"LONG:Vendi dia {datas[i + translacao]} por {preco[i + translacao]}")
+            #print(f"LONG:Vendi por {preco[i + translacao]}")
             patrimonios[0] = patrimonios[1]
             patrimonios[1] = patrimonio
             if patrimonios[1] < patrimonios[0]:
@@ -93,7 +93,7 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
             ganho_percentual = (patrimonios[1] - patrimonios[0]) / patrimonios[0]
             ganhos.append(ganho_percentual)
             perdi += 1
-        #print(f"terminei comprado e vendi no ultimo dia por {datas[i + translacao]}")
+        #print(f"terminei comprado e vendi no ultimo dia por {preco[-1]}")
     if media(ganhos) == 0 or media(perdas) == 0:
         risco = False
     else:

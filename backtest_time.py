@@ -53,7 +53,7 @@ for i in range(len(data_inicial)):
     
     submatriz = Z[tolerancia:,tolerancia:]
 
-    aceitavel = comparacao
+    aceitavel = comparacao * (1)
     #BTC - 0,65
     #ETH - 0,68
     #SOL - 0,8
