@@ -4,12 +4,11 @@ from matplotlib.colors import BoundaryNorm
 import matplotlib.pyplot as plt
 from funcoes import backtest
 
-tolerancia = 1
+tolerancia = 4
 parametro = 9
-medo_inicial = 0
 
-data_inicial = ["31/01/2018", "31/01/2018", "31/01/2019", "31/01/2020", "31/01/2021", "31/01/2022", "31/01/2019"]
-data_final = ["11/09/2024", "31/01/2019","31/01/2020" ,"31/01/2021", "31/01/2022", "31/01/2023", "31/01/2023"]
+data_inicial = ["31/01/2018", "31/12/2019", "01/01/2019"]
+data_final = ["31/12/2023", "31/12/2023", "01/01/2023"]
 
 y_interpolar = list()
 coefs_angular = list()
@@ -55,11 +54,7 @@ for i in range(len(data_inicial)):
     
     submatriz = Z[tolerancia:,tolerancia:]
 
-    indices = np.unravel_index(np.argmax(submatriz),submatriz.shape)
-    primeiro = indices[0] + tolerancia
-    segundo = indices[1] + tolerancia
-
-    aceitavel = submatriz.max() * (0.65)
+    aceitavel = submatriz.max() * (0.6)
     #BTC - 0,65
     #ETH - 0,68
     #SOL - 0,8
@@ -72,7 +67,7 @@ for i in range(len(data_inicial)):
                 second = b + tolerancia
                 #print((X[first,second],Y[first,second]))
                 #numero += 1
-                possiveis.append((float(X[first,second]),float(Y[first,second])))
+                possiveis.append((first,second))
     possiveis_possiveis.append(possiveis.copy())
     possiveis.clear()
     angulos.clear()
@@ -81,10 +76,12 @@ for i in range(len(data_inicial)):
     preco.clear()
     datas.clear()
     medo.clear()
+    print("1")
 
 tuplas_comuns = set(possiveis_possiveis[0]).intersection(*map(set, possiveis_possiveis[1:]))
 tuplas_comuns = list(tuplas_comuns)
 print(tuplas_comuns)
+print(len(tuplas_comuns))
 
 x, y = zip(*tuplas_comuns)
 
@@ -93,10 +90,3 @@ plt.xlabel("X")
 plt.ylabel("Y")
 plt.title("Gráfico de Dispersão dos Pontos")
 plt.show()
-
-def norma(tupla):
-    return np.linalg.norm(tupla)
-
-tupla_menor_norma = min(tuplas_comuns, key=norma)
-
-print(tupla_menor_norma)

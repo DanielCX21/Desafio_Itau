@@ -6,7 +6,7 @@ from matplotlib.colors import BoundaryNorm
 from matplotlib import cm
 from funcoes import backtest, escolhedor
 
-tolerancia = 3
+tolerancia = 4
 preco = dados.preco_close
 medo = dados.medo
 datas = dados.data
