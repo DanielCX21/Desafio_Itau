@@ -87,6 +87,7 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
             situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
             contador += 1
             print(f"LONG:Vendi por {preco[i + translacao]} no dia {data[i + translacao]}")
+            print(f"O patrimonio após isso é de {patrimonio}")
             patrimonios[0] = patrimonios[1]
             patrimonios[1] = patrimonio
             if patrimonios[1] < patrimonios[0]:

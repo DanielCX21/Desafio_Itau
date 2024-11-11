@@ -1,7 +1,7 @@
 import json
 import transform_data
 
-nome_arquivo = 'dados_moedas/dados-BNB.json'
+nome_arquivo = 'dados_moedas/dados-BTC.json'
 
 nome_arquivo_apoio = 'dados_moedas/dados-BTC.json'
 
