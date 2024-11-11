@@ -1,5 +1,8 @@
 import numpy as np
 
+YELLOW = "\033[93m"
+RESET = "\033[0m"
+
 def media(vetor):
     if len(vetor) == 0:
         return 0
@@ -87,7 +90,7 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
             situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
             contador += 1
             print(f"LONG:Vendi por {preco[i + translacao]} no dia {data[i + translacao]}")
-            print(f"O patrimonio após isso é de {patrimonio}")
+            print(f"{YELLOW}O patrimonio após isso é de {patrimonio}{RESET}")
             patrimonios[0] = patrimonios[1]
             patrimonios[1] = patrimonio
             if patrimonios[1] < patrimonios[0]:
@@ -136,9 +139,12 @@ def escolhedor(maximos):
     media_trades /= tamanho
     apoio = list()
     for item in maximos:
-        produto = (item['Pares possíveis'] - media_possibilidades) * (item['número de trades'] - media_trades) * (item['número de trades'] - media_trades) * (item['retorno x risco'] - media_risco)
-        produto = np.fabs(produto)
-        apoio.append(produto)
+        if item['número de trades'] > media_trades and item['maximo'] > media_patrimonio:
+            produto = ((item['número de trades'] - media_trades) ** 2) * (item['maximo'] - media_patrimonio)
+            produto = np.fabs(produto)
+            apoio.append(produto)
+        else:
+            apoio.append(0)
     maximo = max(apoio)
     indices = apoio.index(maximo)
     return indices

@@ -15,9 +15,9 @@ datas = datas[:fim]
 preco = preco[:fim]
 medo = medo[:fim]
 
-a = 76
-b = 62
-timeframe = 9
+a = 78
+b = 49
+timeframe = 10
 x = np.linspace(0,1,100)
 
 x_interpolar = list(range(1,(timeframe + 1)))
