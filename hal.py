@@ -177,9 +177,6 @@ if escolha_long_short == 1:
                     for a in range(X.shape[0]):
                         for b in range(X.shape[1]):
                             Z[a, b] = backtest(time,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0]
-                            #K[a,b] = ((backtest(parametro,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[1]) ** 2) * ((backtest(parametro,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0]) ** (3/2))
-
-                    #teste.append((time,K))
 
                     submatriz = Z[tolerancia:,tolerancia:]
 
@@ -220,15 +217,6 @@ if escolha_long_short == 1:
                 eixo_x.clear()
 
                 print(f"Um possível melhor timeframe é: {escolhedor(maximos) + 3}")
-                '''
-                for vetor in teste:
-                    maximos_teste_valor.append(float(vetor[1].max()))
-                    maximos_teste_indice.append((vetor[0], np.unravel_index(np.argmax(K), K.shape)))
-                
-                melhor = max(maximos_teste_valor) 
-                print(f"Possivel : {melhor}")
-                print(maximos_teste_indice[maximos_teste_valor.index(melhor)])
-                '''
         else:
             pass
 else:
