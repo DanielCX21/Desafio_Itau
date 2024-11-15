@@ -16,9 +16,9 @@ datas = datas[:fim]
 preco = preco[:fim]
 medo = medo[:fim]
 
-a = 78
-b = 49
-timeframe = 10
+a = 86
+b = 75
+timeframe = 6
 x = np.linspace(0,1,100)
 
 x_interpolar = list(range(1,(timeframe + 1)))
@@ -43,7 +43,8 @@ for coef in coefs_angular:
 ASD = 1
 
 datas_especificas = [
-    datas[0], datas[335] , datas[700],  datas[1066],  datas[1431],  datas[1796],  datas[2160]
+    datas[0],   datas[335] , datas[700],  datas[1066],  datas[1431],  datas[1796],  datas[2160]
+    #31/01/2018 #01/01/2019  #01/01/2020, #01/01/2021   #01/01/2022   #01/01/2023   #31/12/2023
 ]
 
 if ASD == 1:
