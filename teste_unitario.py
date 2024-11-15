@@ -1,6 +1,7 @@
 import numpy as np
 import dados
 from funcoes import backtest, backtest_date
+import matplotlib.pyplot as plt
 
 preco = dados.preco_close
 medo = dados.medo
@@ -41,8 +42,16 @@ for coef in coefs_angular:
 
 ASD = 1
 
+datas_especificas = [
+    datas[0], datas[335] , datas[700],  datas[1066],  datas[1431],  datas[1796],  datas[2160]
+]
+
 if ASD == 1:
     print(f"Patrimonio: {backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[0]}")
+    plt.plot(datas,backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[4])
+    plt.xticks(datas_especificas, rotation=45)
+    plt.show()
+
 else:
     print(f"Patrimonio: {backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[0]}")
     print(f"Numero de trades: {backtest(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco)[1]}")

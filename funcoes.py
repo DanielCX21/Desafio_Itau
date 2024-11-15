@@ -80,6 +80,7 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
     patrimonios = [1,1]
     perdas = list()
     ganhos = list()
+    eixo_y = [1] * translacao
     for i in range(len(medo) - translacao):
         if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
             #compra long!
@@ -101,6 +102,7 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
                 ganho_percentual = (patrimonios[1] - patrimonios[0]) / patrimonios[0]
                 ganhos.append(ganho_percentual)
                 perdi += 1
+        eixo_y.append(patrimonio)
     if situacao_long:
         patrimonio = quantidade * preco[-1]
         contador += 1
@@ -121,7 +123,7 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
         risco = media(ganhos) / media(perdas)
     perdas.clear()
     vitorias = ganhei
-    return patrimonio, contador, risco, vitorias
+    return patrimonio, contador, risco, vitorias, eixo_y
 def escolhedor(maximos):
     tamanho = len(maximos)
     media_trades = 0
@@ -140,7 +142,7 @@ def escolhedor(maximos):
     apoio = list()
     for item in maximos:
         if item['número de trades'] > media_trades and item['maximo'] > media_patrimonio:
-            produto = ((item['número de trades'] - media_trades) ** 2) * (item['maximo'] - media_patrimonio)
+            produto = ((item['número de trades'] - media_trades) ** 3.5) * (item['maximo'] - media_patrimonio)
             produto = np.fabs(produto)
             apoio.append(produto)
         else:
