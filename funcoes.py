@@ -2,6 +2,7 @@ import numpy as np
 
 YELLOW = "\033[93m"
 RESET = "\033[0m"
+RED = "\033[31m"
 
 def media(vetor):
     if len(vetor) == 0:
@@ -70,6 +71,9 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
     vitorias = ganhei
     return patrimonio, contador, risco, vitorias
 def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco, data):
+    datas_especificas = [
+    data[0], data[335] , data[700],  data[1066],  data[1431],  data[1796],  data[2160]
+    ]
     medo_inicial = 0
     contador = 0
     ganhei = 0
@@ -80,6 +84,8 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
     ganhos = list()
     eixo_y = [1] * translacao
     for i in range(len(medo) - translacao):
+        if data[i + translacao] in datas_especificas:
+            print(f"{RED}O Patrimonio na virada do ano: {data[i + translacao]} é {vendas_long(True, quantidade,preco[i + translacao])[1]}{RESET}")
         if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
             #compra long!
             situacao_long, quantidade = compras_long(situacao_long,patrimonio,preco[i + translacao])
