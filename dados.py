@@ -1,7 +1,11 @@
 import json
 import transform_data
 
+<<<<<<< HEAD
 nome_arquivo = 'dados_moedas/dados-SOL.json'
+=======
+nome_arquivo = 'dados_moedas/dados-ADA.json'
+>>>>>>> d15f8a16af45eb9f6e135d9a166472bc8bd8b0b0
 
 nome_arquivo_apoio = 'dados_moedas/dados-BTC.json'
 
