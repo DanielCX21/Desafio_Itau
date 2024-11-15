@@ -14,13 +14,11 @@ def media(vetor):
 def compras_long(situacao,patrimonio, preco):
     quantidade = patrimonio / preco
     situacao = True
-    tupla = (situacao,quantidade)
-    return tupla
+    return situacao,quantidade
 def vendas_long(situacao,quantidade, preco):
     patrimonio_final = quantidade * preco
     situacao = False
-    tupla = (situacao,patrimonio_final)
-    return tupla
+    return situacao, patrimonio_final
 def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco):
     medo_inicial = 0
     contador = 0
@@ -102,7 +100,10 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
                 ganho_percentual = (patrimonios[1] - patrimonios[0]) / patrimonios[0]
                 ganhos.append(ganho_percentual)
                 perdi += 1
-        eixo_y.append(patrimonio)
+        if situacao_long:
+            eixo_y.append(vendas_long(True, quantidade,preco[i + translacao])[1])
+        if not situacao_long:
+            eixo_y.append(patrimonio)
     if situacao_long:
         patrimonio = quantidade * preco[-1]
         contador += 1
