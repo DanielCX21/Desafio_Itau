@@ -190,8 +190,8 @@ if escolha_long_short == 1:
                     primeiro = indices[0] + tolerancia
                     segundo = indices[1] + tolerancia
                     print((int(primeiro),int(segundo)))
-                    maximos.append({"timeframe":time,"maximo":float(submatriz.max()),"Pares possíveis":int(numero),"número de trades":int(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]), "retorno x risco":float(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2])})
-                    maximos_second.append({"indices":(int(primeiro),int(segundo)),"Aproveitamento": float(submatriz.max()/multiplicidade), "Trades certos" : int(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[3])})
+                    maximos.append({"timeframe":time,"maximo":float(submatriz.max()),"Pares possíveis":int(numero),"número de trades":int(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[1]), "retorno x risco":float(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[2]), "Trades certos" : int(backtest(time,estou_comprado,angulos,X[primeiro,segundo],Y[primeiro,segundo],medo,1,preco)[3])})
+                    maximos_second.append({"indices":(int(primeiro),int(segundo)),"Aproveitamento": float(submatriz.max()/multiplicidade)})
 
                     angulos.clear()
                     submatriz = np.zeros(submatriz.shape)
@@ -217,7 +217,7 @@ if escolha_long_short == 1:
 
         else:
             pass
-else:
+else: 
     if escolha_long_short == 2:
         print("nada")
     else:

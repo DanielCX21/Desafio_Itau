@@ -16,9 +16,9 @@ datas = datas[:fim]
 preco = preco[:fim]
 medo = medo[:fim]
 
-a = 86
-b = 75
-timeframe = 6
+a = 76
+b = 62
+timeframe = 9
 x = np.linspace(0,1,100)
 
 x_interpolar = list(range(1,(timeframe + 1)))
@@ -42,10 +42,18 @@ for coef in coefs_angular:
 
 ASD = 1
 
+
 datas_especificas = [
     datas[0],   datas[335] , datas[700],  datas[1066],  datas[1431],  datas[1796],  datas[2160]
     #31/01/2018 #01/01/2019  #01/01/2020, #01/01/2021   #01/01/2022   #01/01/2023   #31/12/2023
 ]
+'''
+
+datas_especificas = [
+    datas[0],   datas[267] , datas[632],  datas[997],  datas[1361]
+]
+    #09/04/2020 #01/01/2021  #01/01/2022, #01/01/2023   #01/01/2022
+'''
 
 if ASD == 1:
     print(f"Patrimonio: {backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[0]}")

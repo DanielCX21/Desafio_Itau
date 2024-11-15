@@ -71,9 +71,16 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
     vitorias = ganhei
     return patrimonio, contador, risco, vitorias
 def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco, data):
+    
     datas_especificas = [
-    data[0], data[335] , data[700],  data[1066],  data[1431],  data[1796],  data[2160]
-    ]
+    data[0],   data[335] , data[700],  data[1066],  data[1431],  data[1796],  data[2160]
+    #31/01/2018 #01/01/2019  #01/01/2020, #01/01/2021   #01/01/2022   #01/01/2023   #31/12/2023
+]
+    '''
+    datas_especificas = [
+    data[0],   data[267] , data[632],  data[997],  data[1361]
+]'''
+    
     medo_inicial = 0
     contador = 0
     ganhei = 0
@@ -148,8 +155,10 @@ def escolhedor(maximos):
     media_trades /= tamanho
     apoio = list()
     for item in maximos:
-        if item['número de trades'] > media_trades and item['maximo'] > media_patrimonio:
-            produto = ((item['número de trades'] - media_trades) ** 3.5) * (item['maximo'] - media_patrimonio)
+        print(media_trades)
+        print(media_patrimonio)
+        if item['número de trades'] > media_trades and item['maximo'] > media_patrimonio and item['Trades certos'] > (item['número de trades'] - item['Trades certos']):
+            produto = ((item['número de trades'] - media_trades) ** (2)) * (item['maximo'] - media_patrimonio) 
             produto = np.fabs(produto)
             apoio.append(produto)
         else:

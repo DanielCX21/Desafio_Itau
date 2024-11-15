@@ -1,7 +1,6 @@
 **TIMEFRAMES**
 
 BTC: 9 (76,62)
-SOL: 6 (86,75)
+SOL: 15 (60,67)
 ETH: 9 (76,62)
 ADA: 10 (78,49)
-BNB: FODASE!
