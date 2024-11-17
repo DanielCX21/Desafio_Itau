@@ -20,7 +20,7 @@ def vendas_long(situacao,quantidade, preco):
     patrimonio_final = quantidade * preco
     situacao = False
     return situacao, patrimonio_final
-def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco):
+def backtest(timeframe,angulo, param1, param2, medo, patrimonio,preco):
     medo_inicial = 0
     contador = 0
     ganhei = 0
@@ -29,16 +29,15 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
     patrimonios = [1,1]
     perdas = list()
     ganhos = list()
+    situacao_long = False
     for i in range(len(medo) - translacao):
         if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
             #compra long!
             situacao_long, quantidade = compras_long(situacao_long,patrimonio,preco[i + translacao])
-            #print(f"LONG:Comprei por {preco[i + translacao]}")
         if situacao_long and angulo[i] < (90 * param2) and medo[i + translacao] <  -medo_inicial:
             #venda long!
             situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
             contador += 1
-            #print(f"LONG:Vendi por {preco[i + translacao]}")
             patrimonios[0] = patrimonios[1]
             patrimonios[1] = patrimonio
             if patrimonios[1] < patrimonios[0]:
@@ -62,7 +61,6 @@ def backtest(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,pr
             ganho_percentual = (patrimonios[1] - patrimonios[0]) / patrimonios[0]
             ganhos.append(ganho_percentual)
             perdi += 1
-        #print(f"terminei comprado e vendi no ultimo dia por {preco[-1]}")
     if media(ganhos) == 0 or media(perdas) == 0:
         risco = False
     else:
@@ -76,11 +74,11 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
     data[0],   data[335] , data[700],  data[1066],  data[1431],  data[1796],  data[2160]
     #31/01/2018 #01/01/2019  #01/01/2020, #01/01/2021   #01/01/2022   #01/01/2023   #31/12/2023
 ]
-    '''
-    datas_especificas = [
-    data[0],   data[267] , data[632],  data[997],  data[1361]
-]'''
     
+    datas_especifica = [
+    data[0],   data[267] , data[632],  data[997],  data[1361]
+]
+  
     medo_inicial = 0
     contador = 0
     ganhei = 0
@@ -154,10 +152,10 @@ def escolhedor(maximos):
     media_possibilidades /= tamanho
     media_trades /= tamanho
     apoio = list()
+    print(media_trades)
+    print(media_patrimonio)
     for item in maximos:
-        print(media_trades)
-        print(media_patrimonio)
-        if item['número de trades'] > media_trades and item['maximo'] > media_patrimonio and item['Trades certos'] > (item['número de trades'] - item['Trades certos']):
+        if item['número de trades'] >= media_trades and item['maximo'] >= media_patrimonio and item['Trades certos'] >= (item['número de trades'] - item['Trades certos']):
             produto = ((item['número de trades'] - media_trades) ** (2)) * (item['maximo'] - media_patrimonio) 
             produto = np.fabs(produto)
             apoio.append(produto)

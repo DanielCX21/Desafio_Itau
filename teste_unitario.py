@@ -47,18 +47,19 @@ datas_especificas = [
     datas[0],   datas[335] , datas[700],  datas[1066],  datas[1431],  datas[1796],  datas[2160]
     #31/01/2018 #01/01/2019  #01/01/2020, #01/01/2021   #01/01/2022   #01/01/2023   #31/12/2023
 ]
-'''
 
-datas_especificas = [
+
+datas_especifica = [
     datas[0],   datas[267] , datas[632],  datas[997],  datas[1361]
 ]
     #09/04/2020 #01/01/2021  #01/01/2022, #01/01/2023   #01/01/2022
-'''
+
 
 if ASD == 1:
     print(f"Patrimonio: {backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[0]}")
-    plt.plot(datas,backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[4])
+    plt.plot(datas,backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[4],color="lightgreen", linewidth=3)
     plt.xticks(datas_especificas, rotation=45)
+    plt.ylabel('SOL/USD', fontsize=16)
     plt.show()
 
 else:
