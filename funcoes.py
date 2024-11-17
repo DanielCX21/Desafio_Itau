@@ -88,9 +88,14 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
     perdas = list()
     ganhos = list()
     eixo_y = [1] * translacao
+    eixo_y_marcador = [1]
     for i in range(len(medo) - translacao):
-        if data[i + translacao] in datas_especificas:
+        if data[i + translacao] in datas_especificas and situacao_long:
             print(f"{RED}O Patrimonio na virada do ano: {data[i + translacao]} é {vendas_long(True, quantidade,preco[i + translacao])[1]}{RESET}")
+            eixo_y_marcador.append(vendas_long(True, quantidade,preco[i + translacao])[1])
+        if data[i + translacao] in datas_especificas and not situacao_long:
+            print(f"{RED}O Patrimonio na virada do ano: {data[i + translacao]} é {patrimonios[1]}{RESET}")
+            eixo_y_marcador.append(patrimonios[1])
         if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
             #compra long!
             situacao_long, quantidade = compras_long(situacao_long,patrimonio,preco[i + translacao])
@@ -135,7 +140,7 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
         risco = media(ganhos) / media(perdas)
     perdas.clear()
     vitorias = ganhei
-    return patrimonio, contador, risco, vitorias, eixo_y
+    return patrimonio, contador, risco, vitorias, eixo_y, eixo_y_marcador
 def escolhedor(maximos):
     tamanho = len(maximos)
     media_trades = 0

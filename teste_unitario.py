@@ -59,7 +59,17 @@ if ASD == 1:
     print(f"Patrimonio: {backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[0]}")
     plt.plot(datas,backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[4],color="lightgreen", linewidth=3)
     plt.xticks(datas_especificas, rotation=45)
+    plt.yticks(backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[5])
     plt.ylabel('SOL/USD', fontsize=16)
+    for data in datas_especificas:
+        if data in datas:
+            idx = datas.index(data)
+            y_value = backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[4][idx]
+            plt.plot([data, data], [0, y_value], color="red", linestyle="--", linewidth=1.5)
+            plt.plot([datas_especificas[0],data], [y_value, y_value], color="red", linestyle="--", linewidth=1.5) 
+            plt.scatter(data, y_value, color="black", zorder=5)
+            #plt.text(data, y_value, f"({data}, {y_value})", fontsize=10, color="black")
+
     plt.show()
 
 else:
