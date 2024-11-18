@@ -28,6 +28,7 @@ data = list()
 data_inicio = lista_dados[0]['time']
 data_final = lista_dados[-1]['time']
 
+
 for i, valor in enumerate(lista_dados):
     if "fear_greed_value" in valor:
         medo.append(valor["fear_greed_value"] - 50)
