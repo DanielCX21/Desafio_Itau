@@ -4,6 +4,27 @@ YELLOW = "\033[93m"
 RESET = "\033[0m"
 RED = "\033[31m"
 
+def criar_angulos(medo, time):
+    x_interpolar = list(range(1,(time + 1)))
+    y_interpolar = []
+    coefs_angular = []
+    for i in range(len(medo) - time + 1):
+        for j in range(time):
+            y_interpolar.append(medo[i+j])
+        angular = float(np.polyfit(x_interpolar,y_interpolar,1)[0])
+        coefs_angular.append(angular)
+        y_interpolar.clear()
+
+    angulos = []
+
+    for coef in coefs_angular:
+        informacao = float(np.fabs(np.degrees(np.arctan(coef))))
+        angulos.append(informacao)
+    x_interpolar.clear()
+    y_interpolar.clear()
+    coefs_angular.clear()
+    return angulos
+
 def media(vetor):
     if len(vetor) == 0:
         return 0
@@ -12,16 +33,18 @@ def media(vetor):
         for valor in vetor:
             med += valor
         return (med / (len(vetor)))
+
 def compras_long(situacao,patrimonio, preco):
     quantidade = patrimonio / preco
     situacao = True
     return situacao,quantidade
+
 def vendas_long(situacao,quantidade, preco):
     patrimonio_final = quantidade * preco
     situacao = False
     return situacao, patrimonio_final
+
 def backtest(timeframe,angulo, param1, param2, medo, patrimonio,preco):
-    medo_inicial = 0
     contador = 0
     ganhei = 0
     perdi = 0
@@ -31,10 +54,10 @@ def backtest(timeframe,angulo, param1, param2, medo, patrimonio,preco):
     ganhos = list()
     situacao_long = False
     for i in range(len(medo) - translacao):
-        if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
+        if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > 0:
             #compra long!
             situacao_long, quantidade = compras_long(situacao_long,patrimonio,preco[i + translacao])
-        if situacao_long and angulo[i] < (90 * param2) and medo[i + translacao] <  -medo_inicial:
+        if situacao_long and angulo[i] < (90 * param2) and medo[i + translacao] < 0:
             #venda long!
             situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
             contador += 1
@@ -68,6 +91,7 @@ def backtest(timeframe,angulo, param1, param2, medo, patrimonio,preco):
     perdas.clear()
     vitorias = ganhei
     return patrimonio, contador, risco, vitorias
+
 def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco, data):
     '''
     datas_especifica = [
@@ -79,7 +103,6 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
     data[0],   data[267] , data[632],  data[997],  data[1361]
 ]
   
-    medo_inicial = 0
     contador = 0
     ganhei = 0
     perdi = 0
@@ -96,11 +119,11 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
         if data[i + translacao] in datas_especificas and not situacao_long:
             print(f"{RED}O Patrimonio na virada do ano: {data[i + translacao]} é {patrimonios[1]}{RESET}")
             eixo_y_marcador.append(patrimonios[1])
-        if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > medo_inicial:
+        if not situacao_long and angulo[i] < (90 * param1) and medo[i + translacao] > 0:
             #compra long!
             situacao_long, quantidade = compras_long(situacao_long,patrimonio,preco[i + translacao])
             print(f"LONG:Comprei por {preco[i + translacao]} no dia {data[i + translacao]}")
-        if situacao_long and angulo[i] < (90 * param2) and medo[i + translacao] <  -medo_inicial:
+        if situacao_long and angulo[i] < (90 * param2) and medo[i + translacao] <  0:
             #venda long!
             situacao_long, patrimonio = vendas_long(situacao_long,quantidade,preco[i + translacao])
             contador += 1
@@ -141,6 +164,7 @@ def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimon
     perdas.clear()
     vitorias = ganhei
     return patrimonio, contador, risco, vitorias, eixo_y, eixo_y_marcador
+
 def escolhedor(maximos):
     tamanho = len(maximos)
     media_trades = 0
@@ -150,7 +174,6 @@ def escolhedor(maximos):
     for item in maximos:
         media_patrimonio += item['maximo']
         media_trades += item['número de trades']
-        media_risco += item['retorno x risco']
     media_patrimonio /= tamanho
     media_risco /= tamanho
     media_possibilidades /= tamanho
