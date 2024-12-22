@@ -81,35 +81,6 @@ Outra abordagem é ir reduzindo a pequenos problemas que serão mais facilmente
 resolvidos. De forma que tenhamos no final algo humanamente ruim, porém computacionalmente 
 viável e numéricamente acessível.
 
-02/10/2024
-VolumeFROM -> Número total de unidades da moeda(fsym) transacionada no candle.
-VolumeTO -> Número total de moeda base(tsym) transacionado no candle.
-Divida to/from e veja um valor entre high e low no candle, pois dará um 
-preço "médio" de uma média obtida atráves de todo o "preço do candle"
-dividido por quantas moedas(fsym) passaram por ele. Assim, o volumeTO é 
-o melhor para verificar pontos de alta liquidação. 
-Geramos o RSI para fazer sinais de compra e venda e o de volume para sinal 
-de operação (tanto faz compra e venda)!
-Agora vamos analisar usando uma fórmula de previsão de preço achada através 
-da resolução da eq dif da resistência do ar:
-
-P(t) = P0 ( 1 + a * (G - F) * e ^ (b * t))
-
-Que seria a posição ao resolver a equação dif da resistência do ar!
-
-Para encontrar os valores de a e b vamos testar os melhores em um grande range 
-de valores e a estratégia será a seguinte:
-
-1°) Encontrar um bom ponto de entrada a partir de volume, RSI, e medo e ganância
-2°) Prever o preço tanto para short quanto para long
-3°) Colocar a ordem de venda a partir da previsão de um período de tempo
-4°) Verificar se após o período de tempo especificado a ordem foi batida analisando 
-todos os máximos(em caso de long) e todos os mínimos(em caso de short)
-5°) Colocar um marcador para saber se já estou comprado ou vendido naquele ativo, assim
-não podemos fazer operações com ele.
-
-Problemas, sugestões e reflexões:
-
 * Vamos trabalhar com diversos ativos, como fazer a ponderação?
 -Podemos usar o market cap, mas para isso será nescessário outra requisição
 em API para gerar os dados.
@@ -139,68 +110,6 @@ compraríamos novamente ou ficaríamos nesse ciclo de "x" dias.
 -Nesse caso, fica claro que não é interessante estar em um ciclo de "x" dias já que estaríamos
 perdendo muito potencial.
 
-11/05/2024
-Outra medida que pode ser feita é com base na "velocidade" de reações químicas que seguem o mesmo
-principio. 
-
-    dP/dT = P.K.(feg_index) => P = P0 * e ^ (K*I*t) resolvendo a eq dif...
-
-Dessa vez podemos ter uma forma de encontrar um K particular para cada situação, ou podemos supor
-o caso ideal de equilíbrio químico que K é fixo mantendo condições parecidas.
-
-Outro método parecido seria fazer com que:
-
-    dP/dT = PKI - RP = P * (KI - R) e encontrar a situação que dP/dT que estava crescendo começa a
-
-diminuir, ou seja, se torna 0 => K = R / I.
-
-Contabilizando essas duas estratégias podemos dialéticamente chegar em uma síntese que seria o
-primeiro modelo nos dar a base e o segundo nos dar uma certa margem de erro.
-A partir disto pensaremos em qual modelo será utilizado o I.
-Nesse caso o mais lógico parece ser usar I e [-50,50].
-Desse modo, uma ganância extrema levaria a uma brusca variação de preço, assim como uma pequena
-ganância levaria a uma pequena variação do preço, o que é o contrário do que ocorre na realidade.
-Assim, vamos chegar a determinada fórmula ajustada:
-
-    P = P0 * e ^ (k/I) sendo esse k = k * t e t é o time frame da estratégia que é fixo.
-
-Assim, testaremos esse método com a margem de erro sendo e ^ ( - R * t), assim a intenção é buscar
-uma margem que varia com base no preço inicial, já que a margem de erro deve mudar ao longo do tempo conforme
-mudança na ordem de grandeza do preço.
-
-Nesse caso não importa o que de fato seria a exponencial: e ^ ( - R * t), somente que ela é proporcional
-ao preço inicial do ativo e obviamente será menor que a variação P - P0.
-
-Tal margem de erro serviria como um "checkpoint", ou seja, caso o preço não atinja a ordem, mas chegue 
-próximo, deixaremos o ativo se movimentando e caso retorne próximo ao preço inicial, venderemos no limite
-da margem, obviamente conforme long ou short.
-
-margem = (P - P0) * k e esse k e [0,1] sempre não importando se short ou long.
-
-Esse k da forma que foi modelada deve ser um valor universal do ativo, uma propriedade intrínseca
-ao material, sua cultura, a forma como se estabeleceu na sociedade ao longo do tempo e como o universo
-de traders intuitivamente preve e mede seus riscos ao realizar os trades.
-
-Como descobrir esse k?
-
-Se prevemos um long e o ativo dentro do timeframe pensado só caiu, não teremos um bom espaço de 
-análise, o mesmo para o short.
-Assim, a melhor forma é verificar nos intervalos dados quando prevemos um long que não foi atingido
-até onde o ativo foi. Esse "checkpoint" será medido e faremos algum tipo de média que se encaixe 
-melhor nos nossos objetivos.
-
-Como prever grandes pumps ou dumps?
-
-* Uma solução possível é aumentar o valor do k da primeira exponencial e aumentar o valor da margem, 
-assim teremos a possibilidade de saídas parciais.
-Apostaremos sempre em um grande pump ou dump e teremos uma boa margem para se proteger.
-A margem pode ser proporcional ao feg_index também, já que entrar em um trade com alta ganância tem um 
-alto risco.
-
-Podemos também(e devemos) definir um stop loss para sair do trade independente das condições!
-
-06/10/2024
-Refatoração para os testes dos parâmetros do backtest!
 
 09/10/2024
 
@@ -421,6 +330,8 @@ e aonde não tem é inserido o do BTC que está completo até 01/02/2018.
 Arrumar os dados de ADA, ETH, BNB
 
 03/11/2024
+
+Não vai mais ter BNB!
 
 Fase de conclusão - Para essa semana encontrar os melhores ângulos para as 5 moedas.
 

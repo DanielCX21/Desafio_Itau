@@ -4,7 +4,7 @@ import dados
 import transform_data
 from funcoes import backtest, escolhedor
 
-tolerancia = 0
+tolerancia = 3
 
 preco = dados.preco_close
 medo = dados.medo

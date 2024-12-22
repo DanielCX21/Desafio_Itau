@@ -69,13 +69,13 @@ def backtest(timeframe,angulo, param1, param2, medo, patrimonio,preco):
     vitorias = ganhei
     return patrimonio, contador, risco, vitorias
 def backtest_date(timeframe,situacao_long,angulo, param1, param2, medo, patrimonio,preco, data):
-    
-    datas_especificas = [
+    '''
+    datas_especifica = [
     data[0],   data[335] , data[700],  data[1066],  data[1431],  data[1796],  data[2160]
     #31/01/2018 #01/01/2019  #01/01/2020, #01/01/2021   #01/01/2022   #01/01/2023   #31/12/2023
-]
+]'''
     
-    datas_especifica = [
+    datas_especificas = [
     data[0],   data[267] , data[632],  data[997],  data[1361]
 ]
   
@@ -149,7 +149,6 @@ def escolhedor(maximos):
     media_possibilidades = 0
     for item in maximos:
         media_patrimonio += item['maximo']
-        media_possibilidades += item['Pares possíveis']
         media_trades += item['número de trades']
         media_risco += item['retorno x risco']
     media_patrimonio /= tamanho

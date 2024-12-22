@@ -16,9 +16,9 @@ datas = datas[:fim]
 preco = preco[:fim]
 medo = medo[:fim]
 
-a = 76
-b = 62
-timeframe = 9
+a = 60
+b = 67
+timeframe = 15
 x = np.linspace(0,1,100)
 
 x_interpolar = list(range(1,(timeframe + 1)))
@@ -42,14 +42,14 @@ for coef in coefs_angular:
 
 ASD = 1
 
-
-datas_especificas = [
+'''
+datas_especifica = [
     datas[0],   datas[335] , datas[700],  datas[1066],  datas[1431],  datas[1796],  datas[2160]
     #31/01/2018 #01/01/2019  #01/01/2020, #01/01/2021   #01/01/2022   #01/01/2023   #31/12/2023
 ]
+'''
 
-
-datas_especifica = [
+datas_especificas = [
     datas[0],   datas[267] , datas[632],  datas[997],  datas[1361]
 ]
     #09/04/2020 #01/01/2021  #01/01/2022, #01/01/2023   #01/01/2022
@@ -57,12 +57,15 @@ datas_especifica = [
 
 if ASD == 1:
     print(f"Patrimonio: {backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[0]}")
-    plt.plot(datas,backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[4],color="lightgreen", linewidth=3)
-    plt.xticks(datas_especificas, rotation=45)
-    plt.yticks(backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[5])
+    plt.plot(datas,backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[4],color="green", linewidth=4)
+    plt.xticks(datas_especificas, rotation=35, fontsize=12)
+    aparecer = backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[5].copy()
+    del aparecer[0]
+    del aparecer[1]
+    plt.yticks(aparecer, fontsize=12)
     plt.ylabel('SOL/USD', fontsize=16)
     for data in datas_especificas:
-        if data in datas:
+        if data in datas[1:]:
             idx = datas.index(data)
             y_value = backtest_date(timeframe,estou_comprado,angulos,X[a,b],Y[a,b],medo,1,preco, datas)[4][idx]
             plt.plot([data, data], [0, y_value], color="red", linestyle="--", linewidth=1.5)
