@@ -358,3 +358,8 @@ e aonde não tem é inserido o do BTC que está completo até 01/02/2018.
 Agora basta escolher o parâmetro certo para esses TIMEFRAMES
 utilizar o teste_unitario para pegar os resultados.
 Todos os programas já estão perfeitos, basta os resultados.
+
+22/12/2024
+
+Após pegar TOP 10 o repositório será tornado público e talvez sejam feitas algumas mudanças apenas por
+curiosidade para aprimorar a estratégia.
