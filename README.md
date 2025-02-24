@@ -2,6 +2,11 @@
 
 Desenvolver uma estratégia de investimentos quantitativa.
 
+Esse é o respositório original utilizado pela equipe "Midas Metrics" que desenvolveu o Robo "Hall" que é uma
+menção não somente a Hal Finney, que contribuiu diversamente com o Bitcoin em sua origem e protagonizou o
+famoso tweet: "Running Bitcoin" em 2009, mas também à "2001 - Uma Odisseia no Espaço". A estratégia desenvolvida
+aqui rendeu Top 10 no desafio "Quant Expert" e trouxe muita experiência para todos os membros da equipe. 
+
 11/09/2024
 A estratégia será baseada no índice de medo e ganância e 
 utilizará de uma abordagem psicológica do mercado.
@@ -362,4 +367,4 @@ Todos os programas já estão perfeitos, basta os resultados.
 22/12/2024
 
 Após pegar TOP 10 o repositório será tornado público e talvez sejam feitas algumas mudanças apenas por
-curiosidade para aprimorar a estratégia.
+curiosidade e para aprimorar a estratégia.
