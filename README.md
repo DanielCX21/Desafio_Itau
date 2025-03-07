@@ -35,7 +35,7 @@ fato tal ativo possui tecnologia disruptiva inovadora e pode ser de fato uma
 grande solução para algum problema.
 
 Assim sendo, nossa estratégia consistirá em deixar o mercado ir para o extremo 
-medo ou ganância e só agir quando ouver uma "desaceleração" do movimento.
+medo ou ganância e só agir quando houver uma "desaceleração" do movimento.
 Havendo desaceleração na ganância é indicativo de venda.
 Havendo desaceleração no medo é indicativo de compra.
 
